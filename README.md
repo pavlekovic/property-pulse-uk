@@ -191,24 +191,25 @@ kanban
         No tasks left.
 
     (E1 Story 2: As a Data Analyst/Scientist, I want to have access to stored extracted property data in an efficient, organised format, so that the data can be read quickly and easily by downstream processes.)
-        Task 1: Convert CSV to Parquet for performance
-        Task 2: Organise data into folder structure in "data/raw/YYYY-MM" format
-        Task 3: Add logging for extract step as best practice
-        Task 4: Add inline comments as best practice
-        Task 5: Add docstrings for each function as best practice
+        Task 2.1: Convert CSV to Parquet for performance
+        Task 2.2: Organise data into folder structure in "data/raw/YYYY-MM" format
+        Task 2.3: Add logging for extract step as best practice
+        Task 2.4: Add inline comments as best practice
+        Task 2.5: Add docstrings for each function as best practice
+        Task 2.6: Add testing
 
     (E1 Story 3: As a Data Analyst/Scientist, I want to have access to Local Authority GeoJSON boundaries, so that the property price data can be accurately mapped for visualisation in the Streamlit app.)
-        Task 1: Fetch GeoJSON from source
-        Task 2: Store in "data/mapping/" folder
+        Task 3.1: Fetch GeoJSON from source
+        Task 3.2: Store in "data/mapping/" folder
 
     Done
-        Task 1: Create Python script to ingest CSV from data source using stream=True
-        Task 2: Implement logic that will store the downloaded file as a temp file and replace if process successful
-        Task 3: Create extract "master" script to orchestrate all functions
-        Task 4: Implement logic so that full and monthly fetches are possible
-        Task 5: Add function to determine if full or monthly download is required
-        Task 6: Add JSON state file to track last fetch date
-        Task 7: Task 7: Add helper script to return -resolve- output path and url based on full_done
+        Task 1.1: Create Python script to ingest CSV from data source using stream=True
+        Task 1.2: Implement logic that will store the downloaded file as a temp file and replace if process successful
+        Task 1.3: Create extract "master" script to orchestrate all functions
+        Task 1.4: Implement logic so that full and monthly fetches are possible
+        Task 1.5: Add function to determine if full or monthly download is required
+        Task 1.6: Add JSON state file to track last fetch date
+        Task 1.7: Task 7: Add helper script to return -resolve- output path and url based on full_done
      
 ```
 
