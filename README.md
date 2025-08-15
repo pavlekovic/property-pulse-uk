@@ -198,8 +198,9 @@ kanban
     (E1 Story 2: As a Data Analyst/Scientist, I want to have access to stored extracted property data in an efficient, organised format, so that the data can be read quickly and easily by downstream processes.)
         Task 1: Convert CSV to Parquet for performance
         Task 2: Organise data into folder structure in "data/raw/YYYY-MM" format
-        Task 3: Add logging for extract step
-        Task 4: Add inline comments
+        Task 3: Add logging for extract step as best practice
+        Task 4: Add inline comments as best practice
+        Task 5: Add docstrings for each function as best practice
 
     (E1 Story 3: As a Data Analyst/Scientist, I want to have access to Local Authority GeoJSON boundaries, so that the property price data can be accurately mapped for visualisation in the Streamlit app.)
         Task 1: Fetch GeoJSON from source

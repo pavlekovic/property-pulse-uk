@@ -8,6 +8,7 @@ def run() -> int:
         # Make sure the destination folder exists
         RAW_DIR.mkdir(parents=True, exist_ok=True)
 
+        # Set variable values from config
         fetch_url = FULL_URL
         out_path = OUTPUT_PATH
 
