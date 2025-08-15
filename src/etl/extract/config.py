@@ -1,10 +1,12 @@
 from pathlib import Path
 
-# Full (historic) file – fetched on first run
+# Full (historic) url – fetched on first run - and filename
 FULL_URL = "http://prod.publicdata.landregistry.gov.uk.s3-website-eu-west-1.amazonaws.com/pp-complete.csv"
+FULL_FILENAME = "pp_complete.csv"
 
-# Monthly url
+# Monthly url and filename
 MONTHLY_URL = "http://prod.publicdata.landregistry.gov.uk.s3-website-eu-west-1.amazonaws.com/pp-monthly-update-new-version.csv"
+MONTHLY_FILENAME = "pp_monthly.csv"
 
 # Base path: go three levels up from this config file
 BASE_DIR = Path(__file__).resolve().parents[3]
