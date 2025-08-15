@@ -8,14 +8,10 @@ def run() -> int:
         # Make sure the destination folder exists
         RAW_DIR.mkdir(parents=True, exist_ok=True)
 
-        # Set variable values from config
-        fetch_url = FULL_URL
-        out_path = OUTPUT_PATH
-
         # Perform fetch data and pass on parameters
         saved = stream_download(
-            url=fetch_url,
-            output_path=out_path,
+            url=FULL_URL,
+            output_path=OUTPUT_PATH,
             chunk_size=CHUNK_SIZE,
             timeout=TIMEOUT
         )
