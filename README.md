@@ -194,16 +194,15 @@ kanban
         No tasks left.
 
     (E1 Story 3: As a Data Analyst/Scientist, I want to have access to stored extracted property data in an efficient, organised format, so that the data can be read quickly and easily by downstream processes.)
-        Task 3.1: Convert CSV to Parquet for performance
         Task 3.3: Add logging for extract step as best practice
-        Task 3.5: Add docstrings for each function as best practice
-        Task 3.6: Unit test: extract.py
+        Task 3.4: Add docstrings for each function as best practice
+        Task 3.5: Unit test: extract.py
         Task 3.6: Unit test: fetch_data.py
-        Task 3.6: Unit test: fetch_geojson.py
-        Task 3.6: Unit test: date_utils.py
-        Task 3.6: Unit test: state_utils.py
-        Task 3.6: Unit test: geojson_utils.py
-        Task 3.6: Unit test: path_resolve_utils.py
+        Task 3.7: Unit test: fetch_geojson.py
+        Task 3.8: Unit test: date_utils.py
+        Task 3.9: Unit test: state_utils.py
+        Task 3.10: Unit test: geojson_utils.py
+        Task 3.11: Unit test: path_resolve_utils.py
         
     Done
         Task 1.1: Create Python script to ingest CSV from data source using stream=True
@@ -215,8 +214,8 @@ kanban
         Task 1.7: Task 7: Add helper script to return -resolve- output path and url based on full_done
         Task 2.1: Fetch GeoJSON from source
         Task 2.2: Store in "data/mapping/" folder
-        Task 3.2: Organise pp data into folder structure in "data/raw/YYYY-MM" format
-        Task 3.4: Add inline comments as best practice
+        Task 3.1: Organise pp data into folder structure in "data/raw/YYYY-MM" format
+        Task 3.2: Add inline comments as best practice
      
 ```
 
@@ -235,14 +234,14 @@ kanban
         (Epic 4: As a Property Pulse UK user, I want to access the extracted and transformed property price data through an intuitive, interactive interface, so that I can easily search, explore, and visualise property price trends across the UK.)
 
     (E2 Story 1: As a Data Analyst/Scientist, I want to have clean, validated, and standardised property price dataset — including dates, currency, categories, and location identifiers, so that the data is accurate, consistent, and ready for reliable analysis and visualisation.)
-        Task 1:
-        Task 2:
-        Task 3:
+        Task 1.1: Convert CSV to Parquet for performance
+        Task 1.2:
+        Task 1.3:
 
     (E2 Story 2: As a Data Analyst/Scientist, I want to have access to a single dataset with monthly updates merged into the historical dataset and enrich each record with spatial identifiers, so that the dataset remains complete, up-to-date, and ready for geospatial analysis.)
-        Task 1:
-        Task 2:
-        Task 3:
+        Task 2.1:
+        Task 2.2:
+        Task 2.3:
 
     Done
         
