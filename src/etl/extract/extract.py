@@ -17,7 +17,11 @@ def run() -> int:
         )
 
         if saved:
+            print(f"[extract] SUCCESS: saved to {OUTPUT_PATH}")
             return 0
+        else:
+            print(f"[extract] FAILED: no file saved")
+            return 1
 
     # In case fetching data fails for whatever reason, print and return 1
     except Exception as e:
