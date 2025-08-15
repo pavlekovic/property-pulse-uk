@@ -14,6 +14,11 @@ BASE_DIR = Path(__file__).resolve().parents[3]
 # Raw files directory
 RAW_DIR = BASE_DIR / "data" / "raw"
 
+# GEOJSON directory
+MAPPING_DIR = BASE_DIR / "data" / "mapping"
+GEOJSON_API_URL = "https://services1.arcgis.com/ESMARspQHYMw9BZ9/arcgis/rest/services/LAD_MAY_2025_UK_BGC_V2/FeatureServer/0/query"
+GEOJSON_PATH = MAPPING_DIR / "local_authority.geojson"
+
 # Example output path for a specific file
 OUTPUT_PATH = RAW_DIR / "pp_complete.csv"
 
