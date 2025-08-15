@@ -188,7 +188,8 @@ kanban
         (Epic 4: As a Property Pulse UK user, I want to access the extracted and transformed property price data through an intuitive, interactive interface, so that I can easily search, explore, and visualise property price trends across the UK.)
 
     (E1 Story 1: As a Data Analyst/Scientist, I want to access the UK property price dataset, both full history and monthly updates, from the Land Registry, so that I can maintain an up-to-date raw dataset for downstream processing.)
-        
+        No tasks left.
+
     (E1 Story 2: As a Data Analyst/Scientist, I want to have access to stored extracted property data in an efficient, organised format, so that the data can be read quickly and easily by downstream processes.)
         Task 1: Convert CSV to Parquet for performance
         Task 2: Organise data into folder structure in "data/raw/YYYY-MM" format
@@ -207,8 +208,10 @@ kanban
         Task 4: Implement logic so that full and monthly fetches are possible
         Task 5: Add function to determine if full or monthly download is required
         Task 6: Add JSON state file to track last fetch date
-        Task 7: Add helper script to return (resolve) output path and url based on full_done
+        Task 7: Task 7: Add helper script to return -resolve- output path and url based on full_done
+     
 ```
+
 
 ### EPIC 2 User stories and tasks
 
