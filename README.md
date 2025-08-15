@@ -199,8 +199,7 @@ kanban
         Task 2.6: Add testing
 
     (E1 Story 3: As a Data Analyst/Scientist, I want to have access to Local Authority GeoJSON boundaries, so that the property price data can be accurately mapped for visualisation in the Streamlit app.)
-        Task 3.1: Fetch GeoJSON from source
-        Task 3.2: Store in "data/mapping/" folder
+        No tasks left.
 
     Done
         Task 1.1: Create Python script to ingest CSV from data source using stream=True
@@ -210,6 +209,8 @@ kanban
         Task 1.5: Add function to determine if full or monthly download is required
         Task 1.6: Add JSON state file to track last fetch date
         Task 1.7: Task 7: Add helper script to return -resolve- output path and url based on full_done
+        Task 3.1: Fetch GeoJSON from source
+        Task 3.2: Store in "data/mapping/" folder
      
 ```
 
