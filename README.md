@@ -75,6 +75,7 @@ property price trends across the UK.
 ```
 
 ---
+
 ## EPIC Breakdown
 
 ### EPIC 1
@@ -196,13 +197,13 @@ kanban
 
     (E1 Story 2: As a Data Analyst/Scientist, I want to have access to stored extracted property data in an efficient, organised format, so that the data can be read quickly and easily by downstream processes.)
         Task 1: Convert CSV to Parquet for performance
-        Task 2: Organise data into versioned folder structure in "data/raw/YYYY-MM" format
+        Task 2: Organise data into folder structure in "data/raw/YYYY-MM" format
         Task 3: Add logging for extract step
-        Task 4: Add inline comments for maintainability
+        Task 4: Add inline comments
 
     (E1 Story 3: As a Data Analyst/Scientist, I want to have access to Local Authority GeoJSON boundaries, so that the property price data can be accurately mapped for visualisation in the Streamlit app.)
         Task 1: Fetch GeoJSON from source
-        Task 2: Store in data/mapping/ folder
+        Task 2: Store in "data/mapping/" folder
 
     Done
 ```
