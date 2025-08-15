@@ -31,7 +31,6 @@ powered by machine learning.
 
 ---
 
-
 ## EPIC 1
 
 ```text
@@ -42,9 +41,6 @@ data, so that the ETL pipeline can reliably maintain both full
 historical records and monthly updates ready for transformation, 
 analysis, and visualisation.
 ```
-
----
-
 
 ## EPIC 2
 
@@ -58,9 +54,6 @@ analysed within the Streamlit application and future
 machine learning models.
 ```
 
----
-
-
 ## EPIC 3
 
 ```text
@@ -70,8 +63,6 @@ to be loaded into a single, well-structured SQL table,
 so that I can efficiently query, analyse, and generate 
 insights on UK property prices.
 ```
-
----
 
 ## EPIC 4
 
@@ -84,9 +75,9 @@ property price trends across the UK.
 ```
 
 ---
----
+## EPIC Breakdown
 
-## EPIC 1 Breakdown
+### EPIC 1
 
 ```text
 As a Data Analyst/Scientist,
@@ -97,9 +88,7 @@ historical records and monthly updates ready for transformation,
 analysis, and visualisation.
 ```
 
----
-
-### USER STORY 1
+#### USER STORY 1
 
 ```text
 As a Data Analyst/Scientist,
@@ -109,7 +98,7 @@ so that I can maintain an up-to-date raw dataset for
 downstream processing.
 ```
 
-### USER STORY 2
+#### USER STORY 2
 
 ```text
 As a Data Analyst/Scientist,
@@ -118,7 +107,7 @@ in an efficient, organised format, so that the data can be
 read quickly and easily by downstream processes.
 ```
 
-### USER STORY 3
+#### USER STORY 3
 
 ```text
 As a Data Analyst/Scientist,
@@ -128,9 +117,8 @@ visualisation in the Streamlit app.
 ```
 
 ---
----
 
-## EPIC 2 Breakdown
+### EPIC 2
 
 ```text
 As a Data Analyst/Scientist,
@@ -142,9 +130,7 @@ analysed within the Streamlit application and future
 machine learning models.
 ```
 
----
-
-### USER STORY 1
+#### USER STORY 1
 
 ```text
 As a Data Analyst/Scientist,
@@ -154,7 +140,7 @@ location identifiers, so that the data is accurate, consistent,
 and ready for reliable analysis and visualisation.
 ```
 
-### USER STORY 2
+#### USER STORY 2
 
 ```text
 As a Data Analyst/Scientist,
@@ -164,8 +150,30 @@ so that the dataset remains complete, up-to-date, and
 ready for geospatial analysis.
 ```
 
+### EPIC 3
+
+```text
+As a Data Analyst/Scientist,
+I want the extracted and transformed property price data 
+to be loaded into a single, well-structured SQL table, 
+so that I can efficiently query, analyse, and generate 
+insights on UK property prices.
+```
+
+### EPIC 4
+
+```text
+As a Property Pulse UK user,
+I want to access the extracted and transformed property 
+price data through an intuitive, interactive interface, 
+so that I can easily search, explore, and visualise 
+property price trends across the UK.
+```
+
 ---
----
+
+## KANBAN BOARD
+### EPIC 1 User stories and tasks
 
 ```mermaid
 kanban
@@ -199,7 +207,7 @@ kanban
     Done
 ```
 
----
+### EPIC 2 User stories and tasks
 
 ```mermaid
 kanban
