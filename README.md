@@ -1,19 +1,32 @@
 
 ## PROJECT REQUIREMENTS
 
-A customer has approached us with a requirement to create a data set that their Data Analysts and Data Scientists can work with.
+Property Pulse UK aims to provide users with a powerful property price search tool and, eventually, predictive insights for future property values using machine learning.
 
-The customer requires a robust ETL pipeline to integrate transaction data from a SQL database and demographic data from a CSV file. The pipeline must clean and standardise the data, remove invalid or incomplete records, and retain only active customers who have spent over $500. Additionally, it should enrich the dataset by calculating total customer spending and average transaction value per customer. This is so the company can target high-value customers with relevant marketing and rewards.  The final dataset must be stored in SQL and updated regularly for accurate analysis.
+The project requires a robust ETL pipeline to automatically download monthly UK property price data from the Land Registry’s public dataset, store it in a structured format, and prepare it for both analysis and application use. The pipeline must:
+- Fetch new monthly data from a fixed URL.
+- Store each month’s dataset in a versioned folder structure (data/raw/YYYY-MM).
+- Clean and standardise the data, handling missing values and ensuring consistent formats (e.g., dates, currency, location fields).
+- Integrate and combine monthly datasets into a unified historical dataset.
+- Prepare the dataset for use in a Streamlit web application, enabling property searches by location, price range, and other filters.
+- Maintain a history of all updates to support both current and retrospective property market analysis.
+
+The final processed dataset will form the backbone of the Property Pulse UK app, supporting user-friendly search and future ML-driven property price predictions.
 
 ---
-
 
 ## PROJECT REQUIREMENTS AS AN EPIC
 
 ```text
-As a THE CUSTOMER,
-I want a robust ETL pipeline that integrates, cleans, standardises, and enriches transaction and demographic data from SQL and CSV sources, retaining only active customers who have spent over $500 and calculating total and average spend per customer,
-So that high-value customers can be identified and targeted with marketing and rewards, using an up-to-date dataset stored in SQL for accurate analysis.
+As a DA/DS and PROPERTY PULSE UK USER,
+I want a robust ETL pipeline that automatically fetches, 
+cleans, and standardises monthly UK property price data 
+from public Land Registry CSV sources, storing each update 
+in a versioned format and merging it with historical records,
+So that I can search, analyse, and track property price trends 
+over time in the Property Pulse UK app, and in the future, 
+receive data-driven predictions on property values
+powered by machine learning.
 ```
 
 ---
@@ -74,80 +87,19 @@ So that it can be transformed ready for analysis.
 ### USER STORY 1
 
 ```text
-As a Data Analyst/Scientist,
-I want to be able to access the property prices data from the CSV file,
-So that it can be transformed ready for analysis.
+As a Data Analyst/Scientist, 
+I want to be able to access the property prices data 
+from the CSV/parquet file, so that it can be 
+transformed ready for analysis.
 ```
 
 ### USER STORY 2
 
 ```text
-As a Data Analyst/Scientist,
-I want to be able to access the customer data from the parquet file,
-So that it can be transformed, ready for analysis
-```
-
-### USER STORY 3
-
-```text
-As a Data Analyst/Scientist,
-I want to be able to perform monthly updates,
-So new data can be added to the dataset.
-```
-
-
----
----
-
-## EPIC 2 Breakdown
-
-```text
-As a Data Analyst/Scientist,
-I want to be able to access clean, standardised, enriched and aggregated data,
-So that it can be analysed easier
-```
-
-### USER STORY 3
-
-```text
-As a Data Analyst/Scientist,
-I want to be able to access cleaned, standardised transaction data,
-So that it can be combined with the customer data and made available as a single table
-```
-
-### USER STORY 4
-
-```text
-As a Data Analyst/Scientist,
-I want to be able to access cleaned, standardised customer data,
-So that it can be combined with the transaction data and made available as a single table
-```
-
-###  USER STORY 5
-
-```text
-As a Data Analyst/Scientist,
-I want to be able to access the combined, enriched and aggregated transaction and customer data,
-So that it can be analysed easier
-```
-
----
----
-
-## EPIC 3 Breakdown
-
-```text
-As a Data Analyst/Scientist,
-I want to be able to access the extracted, transformed data in a single SQL table,
-So that analysis can be done on high value customers
-```
-
-### USER STORY 6
-
-```text
-As a Data Analyst/Scientist,
-I want the cleaned, standardised, enriched and aggregated data to be available in a single SQL table,
-So that it can be analysed easier
+As a Data Analyst/Scientist, 
+I want to be able to access the property prices data 
+from the CSV/parquet file that is mapped onto a UK,
+so that it can be visually inspected for average prices by region
 ```
 
 ---
@@ -170,11 +122,13 @@ kanban
         Task 8: Add logging
         Task 9: Add folder structure and keep functions in separate files
         Task 10: Make CSV into parquet file for better performance
-    (Epic 1 Story 2: As a Data Analyst/Scientist, I want to be able to access the property prices data from the CSV/parquet file that is mapped onto a UK, so that it can be visually inspected for average prices etc.)
+    (Epic 1 Story 2: As a Data Analyst/Scientist, I want to be able to access the property prices data from the CSV/parquet file that is mapped onto a UK, so that it can be visually inspected for average prices by region)
         Task 1: Implement fetching GEOJSON file, local authority level, needed to generate Streamlit map functionality
         Task 2: Fix any inconsistencies between GEOJSON and property prices data, e.g. Bristol, City of -> Bristol
     Done
 ```
+
+---
 
 ```mermaid
 kanban
