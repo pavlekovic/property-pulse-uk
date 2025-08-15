@@ -19,14 +19,8 @@ The final processed dataset will form the backbone of the Property Pulse UK app,
 
 ```text
 As a DA/DS and PROPERTY PULSE UK USER,
-I want a robust ETL pipeline that automatically fetches, 
-cleans, and standardises monthly UK property price data 
-from public Land Registry CSV sources, storing each update 
-in a versioned format and merging it with historical records,
-So that I can search, analyse, and track property price trends 
-over time in the Property Pulse UK app, and in the future, 
-receive data-driven predictions on property values
-powered by machine learning.
+I want a robust ETL pipeline that automatically fetches, cleans, and standardises monthly UK property price data from public Land Registry CSV sources, storing each update in a versioned format and merging it with historical records,
+So that I can search, analyse, and track property price trends over time in the Property Pulse UK app, and in the future, receive data-driven predictions on property values powered by machine learning.
 ```
 
 ---
