@@ -188,12 +188,11 @@ kanban
         (Epic 4: As a Property Pulse UK user, I want to access the extracted and transformed property price data through an intuitive, interactive interface, so that I can easily search, explore, and visualise property price trends across the UK.)
 
     (E1 Story 1: As a Data Analyst/Scientist, I want to access the UK property price dataset, both full history and monthly updates, from the Land Registry, so that I can maintain an up-to-date raw dataset for downstream processing.)
-        Task 1: Create Python script to ingest CSV from data source
-        Task 2: Implement logic so that full and monthly fetches are possible
-        Task 3: Add function to determine if full or monthly download is required
-        Task 4: Add JSON state file to track last fetch date
-        Task 5: Add helper to return last month’s year/month
-        Task 6: Create extract "master" script to orchestrate all functions
+        Task 4: Implement logic so that full and monthly fetches are possible
+        Task 5: Add function to determine if full or monthly download is required
+        Task 6: Add JSON state file to track last fetch date
+        Task 7: Add helper to return last month’s year/month
+        
 
     (E1 Story 2: As a Data Analyst/Scientist, I want to have access to stored extracted property data in an efficient, organised format, so that the data can be read quickly and easily by downstream processes.)
         Task 1: Convert CSV to Parquet for performance
@@ -207,6 +206,9 @@ kanban
         Task 2: Store in "data/mapping/" folder
 
     Done
+        Task 1: Create Python script to ingest CSV from data source using stream=True
+        Task 2: Implement logic that will store the downloaded file as a temp file and replace if process successful
+        Task 3: Create extract "master" script to orchestrate all functions
 ```
 
 ### EPIC 2 User stories and tasks
