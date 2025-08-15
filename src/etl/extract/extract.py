@@ -1,18 +1,41 @@
 import sys
 from pathlib import Path
 from fetch_data import stream_download
+from geojson_utils import ensure_geojson_once
 from state_utils import read_state, write_state
 from date_utils import last_month_ym
 from path_resolve_utils import resolve_url_and_out_path
-from config import (FULL_URL, MONTHLY_URL, RAW_DIR,CHUNK_SIZE, TIMEOUT, STATE_FILE, FULL_FILENAME, MONTHLY_FILENAME)
+from config import (FULL_URL, MONTHLY_URL, RAW_DIR,CHUNK_SIZE, TIMEOUT, STATE_FILE, 
+                    FULL_FILENAME, MONTHLY_FILENAME, MAPPING_DIR, GEOJSON_PATH, GEOJSON_API_URL)
 
 def run() -> int:
     try:
         # Make sure the destination folder exists
         RAW_DIR.mkdir(parents=True, exist_ok=True)
 
-        # Read and return last state to be able to choose full history or monthly download
+        # Load info from state JSON file
         state = read_state(STATE_FILE)
+        
+        
+        # --------------------------------------
+        # GEOJSON DATA
+        # --------------------------------------
+        
+        saved_geojson = ensure_geojson_once(
+                state=state,
+                mapping_dir=MAPPING_DIR,
+                geojson_path=GEOJSON_PATH,
+                geojson_url=GEOJSON_API_URL,
+                timeout=TIMEOUT,
+            )
+        
+        # Write state for geojson
+        write_state(STATE_FILE, saved_geojson)
+        
+        
+        # --------------------------------------
+        # PROPERTY PRICE DATA
+        # --------------------------------------
         
         # Store state in a variable to be reused
         full_done = state.get("full_import_done", False)
@@ -28,11 +51,11 @@ def run() -> int:
         
         # if this month's file already exists, skip
         if out_path.exists():
-            print(f"[extract] FAILED: File already exists.")
+            print(f"[extract] Price paid data already fetched: {out_path}")
             return 1
         
         # Perform fetch data and pass on parameters
-        saved = stream_download(
+        saved_data = stream_download(
             url=fetch_url,                  # Either full or monthly
             output_path=out_path,           # Either raw/ or raw/YYYY-MM
             chunk_size=CHUNK_SIZE,
@@ -49,14 +72,11 @@ def run() -> int:
         # Write state
         write_state(STATE_FILE, state)
         
-        if saved:
+        if saved_data:
             print(f"[extract] SUCCESS: saved to {out_path}")
-            return 0
         else:
             print(f"[extract] FAILED: no file saved")
-            return 1
-        
-        
+            
     # In case fetching data fails for whatever reason, print and return 1
     except Exception as e:
         print(f"[extract] FAILED: {e}")

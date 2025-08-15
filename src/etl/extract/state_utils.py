@@ -4,7 +4,8 @@ import json
 # In case running for the first time
 DEFAULT_STATE = {
     "full_import_done": False,
-    "last_month_fetched": None
+    "last_month_fetched": None,
+    "geojson_fetched": False
 }
 
 # Read the current state from the JSON file
