@@ -3,7 +3,8 @@ from pathlib import Path
 from fetch_data import stream_download
 from state_utils import read_state, write_state
 from date_utils import last_month_ym
-from config import (FULL_URL, MONTHLY_URL, RAW_DIR,CHUNK_SIZE, TIMEOUT, STATE_FILE)
+from path_resolve_utils import resolve_url_and_out_path
+from config import (FULL_URL, MONTHLY_URL, RAW_DIR,CHUNK_SIZE, TIMEOUT, STATE_FILE, FULL_FILENAME, MONTHLY_FILENAME)
 
 def run() -> int:
     try:
@@ -16,16 +17,14 @@ def run() -> int:
         # Store state in a variable to be reused
         full_done = state.get("full_import_done", False)
         
-        # If the state is DEFAULT_STATE
-        if not full_done:
-            # First run
-            fetch_url = FULL_URL
-            out_path = RAW_DIR / "pp_complete.csv"
-        else:
-            # Monthly update run
-            #ym = "2025-07"
-            fetch_url = MONTHLY_URL
-            out_path = RAW_DIR / last_month_ym() / "pp_monthly.csv"
+        fetch_url, out_path = resolve_url_and_out_path(
+            full_done=full_done,
+            raw_dir=RAW_DIR,
+            full_url=FULL_URL,
+            monthly_url=MONTHLY_URL,
+            full_filename=FULL_FILENAME,
+            monthly_filename=MONTHLY_FILENAME,
+        )
         
         # if this month's file already exists, skip
         if out_path.exists():
@@ -35,10 +34,10 @@ def run() -> int:
         # Perform fetch data and pass on parameters
         saved = stream_download(
             url=fetch_url,                  # Either full or monthly
-            output_path=out_path,        # Either raw/ or raw/YYYY-MM
+            output_path=out_path,           # Either raw/ or raw/YYYY-MM
             chunk_size=CHUNK_SIZE,
             timeout=TIMEOUT
-        )        
+        )
         
         # Update state
         if not full_done:                                   # If first run
