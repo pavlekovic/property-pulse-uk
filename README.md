@@ -36,8 +36,11 @@ powered by machine learning.
 
 ```text
 As a Data Analyst/Scientist,
-I want to be able to access the property prices data,
-So that it can be transformed ready for analysis.
+I want to have a robust extraction process that can download, 
+track, and store UK property price data and supporting geospatial 
+data, so that the ETL pipeline can reliably maintain both full 
+historical records and monthly updates ready for transformation, 
+analysis, and visualisation.
 ```
 
 ---
@@ -47,8 +50,12 @@ So that it can be transformed ready for analysis.
 
 ```text
 As a Data Analyst/Scientist,
-I want to be able to access clean, standardised, enriched and aggregated property prices data,
-So that it can be analysed easier.
+I want to transform and standardise the raw property 
+price datasets so that they are clean, consistent, and 
+geospatially compatible with the GeoJSON location data,
+so that the data can be reliably joined, visualised, and
+analysed within the Streamlit application and future 
+machine learning models.
 ```
 
 ---
@@ -58,8 +65,10 @@ So that it can be analysed easier.
 
 ```text
 As a Data Analyst/Scientist,
-I want to be able to access the extracted, transformed data in a single SQL table,
-So that analysis can be done on property prices in the UK.
+I want the extracted and transformed property price data 
+to be loaded into a single, well-structured SQL table, 
+so that I can efficiently query, analyse, and generate 
+insights on UK property prices.
 ```
 
 ---
@@ -67,19 +76,25 @@ So that analysis can be done on property prices in the UK.
 ## EPIC 4
 
 ```text
-As the product user,
-I want to be able to access the extracted, transformed data in through a user-friendly interface,
-So that insights on property prices in the UK can be easily visualised.
+As a Property Pulse UK user,
+I want to access the extracted and transformed property 
+price data through an intuitive, interactive interface, 
+so that I can easily search, explore, and visualise 
+property price trends across the UK.
 ```
 
+---
 ---
 
 ## EPIC 1 Breakdown
 
 ```text
 As a Data Analyst/Scientist,
-I want to be able to access the property prices data,
-So that it can be transformed ready for analysis.
+I want to have a robust extraction process that can download, 
+track, and store UK property price data and supporting geospatial 
+data, so that the ETL pipeline can reliably maintain both full 
+historical records and monthly updates ready for transformation, 
+analysis, and visualisation.
 ```
 
 ---
@@ -87,44 +102,100 @@ So that it can be transformed ready for analysis.
 ### USER STORY 1
 
 ```text
-As a Data Analyst/Scientist, 
-I want to be able to access the property prices data 
-from the CSV/parquet file, so that it can be 
-transformed ready for analysis.
+As a Data Analyst/Scientist,
+I want to access the UK property price dataset, both 
+full history and monthly updates, from the Land Registry, 
+so that I can maintain an up-to-date raw dataset for 
+downstream processing.
 ```
 
 ### USER STORY 2
 
 ```text
-As a Data Analyst/Scientist, 
-I want to be able to access the property prices data 
-from the CSV/parquet file that is mapped onto a UK,
-so that it can be visually inspected for average prices by region
+As a Data Analyst/Scientist,
+I want to have access to stored extracted property data 
+in an efficient, organised format, so that the data can be 
+read quickly and easily by downstream processes.
 ```
 
+### USER STORY 3
+
+```text
+As a Data Analyst/Scientist,
+I want to have access to Local Authority GeoJSON boundaries,
+so that the property price data can be accurately mapped for 
+visualisation in the Streamlit app.
+```
+
+---
+---
+
+## EPIC 2 Breakdown
+
+```text
+As a Data Analyst/Scientist,
+I want to transform and standardise the raw property 
+price datasets so that they are clean, consistent, and 
+geospatially compatible with the GeoJSON location data,
+so that the data can be reliably joined, visualised, and
+analysed within the Streamlit application and future 
+machine learning models.
+```
+
+---
+
+### USER STORY 1
+
+```text
+As a Data Analyst/Scientist,
+I want to have clean, validated, and standardised property 
+price dataset — including dates, currency, categories, and 
+location identifiers, so that the data is accurate, consistent, 
+and ready for reliable analysis and visualisation.
+```
+
+### USER STORY 2
+
+```text
+As a Data Analyst/Scientist,
+I want to have access to a single dataset with monthly updates merged into the historical 
+dataset and enrich each record with spatial identifiers, 
+so that the dataset remains complete, up-to-date, and 
+ready for geospatial analysis.
+```
+
+---
 ---
 
 ```mermaid
 kanban
     Epics
-        (Epic 1: As a Data Analyst/Scientist, I want to be able to access the property prices data, so that it can be transformed ready for analysis.)
-        (Epic 2: As a Data Analyst/Scientist, I want to be able to access clean, standardised, enriched and aggregated property prices data, so that it can be analysed easier.)
-        (Epic 3: As a Data Analyst/Scientist, I want to be able to access the extracted, transformed data in a single SQL table, so that analysis can be done on property prices in the UK.)
-        (Epic 4: As the product user, I want to be able to access the extracted, transformed data in through a user-friendly interface, so that insights on property prices in the UK can be easily visualised.)
-    (Epic 1 Story 1: As a Data Analyst/Scientist, I want to be able to access the property prices data from the CSV/parquet file, so that it can be transformed ready for analysis.)
-        Task 1: Create a python script to ingest data in the CSV format from the data source
-        Task 2: Create a python script that will be able to ingest both full historic data and monthly updates
-        Task 3: Create a python script that will check if full or monthly download is needed
-        Task 4: Create a JSON file that will store records for helper function
-        Task 5: Create a python script that will check date and return last month
-        Task 6: Create a "master" extract python script that will call all other functions
-        Task 7: Add comments throughout
-        Task 8: Add logging
-        Task 9: Add folder structure and keep functions in separate files
-        Task 10: Make CSV into parquet file for better performance
-    (Epic 1 Story 2: As a Data Analyst/Scientist, I want to be able to access the property prices data from the CSV/parquet file that is mapped onto a UK, so that it can be visually inspected for average prices by region)
-        Task 1: Implement fetching GEOJSON file, local authority level, needed to generate Streamlit map functionality
-        Task 2: Fix any inconsistencies between GEOJSON and property prices data, e.g. Bristol, City of -> Bristol
+        (Epic 1: As a Data Analyst/Scientist, I want to have a robust extraction process that can download, track, and store UK property price data and supporting geospatial data, so that the ETL pipeline can reliably maintain both full historical records and monthly updates ready for transformation, analysis, and visualisation.)
+
+        (Epic 2: As a Data Analyst/Scientist, I want to have raw property price datasets transformed and standardised the so that they are clean, consistent, and geospatially compatible with the GeoJSON location data, so that the data can be reliably joined, visualised, and analysed within the Streamlit application and future machine learning models.)
+
+        (Epic 3: As a Data Analyst/Scientist, I want the extracted and transformed property price data to be loaded into a single, well-structured SQL table, so that I can efficiently query, analyse, and generate insights on UK property prices.)
+
+        (Epic 4: As a Property Pulse UK user, I want to access the extracted and transformed property price data through an intuitive, interactive interface, so that I can easily search, explore, and visualise property price trends across the UK.)
+
+    (E1 Story 1: As a Data Analyst/Scientist, I want to access the UK property price dataset, both full history and monthly updates, from the Land Registry, so that I can maintain an up-to-date raw dataset for downstream processing.)
+        Task 1: Create Python script to ingest CSV from data source
+        Task 2: Implement logic so that full and monthly fetches are possible
+        Task 3: Add function to determine if full or monthly download is required
+        Task 4: Add JSON state file to track last fetch date
+        Task 5: Add helper to return last month’s year/month
+        Task 6: Create extract "master" script to orchestrate all functions
+
+    (E1 Story 2: As a Data Analyst/Scientist, I want to have access to stored extracted property data in an efficient, organised format, so that the data can be read quickly and easily by downstream processes.)
+        Task 1: Convert CSV to Parquet for performance
+        Task 2: Organise data into versioned folder structure in "data/raw/YYYY-MM" format
+        Task 3: Add logging for extract step
+        Task 4: Add inline comments for maintainability
+
+    (E1 Story 3: As a Data Analyst/Scientist, I want to have access to Local Authority GeoJSON boundaries, so that the property price data can be accurately mapped for visualisation in the Streamlit app.)
+        Task 1: Fetch GeoJSON from source
+        Task 2: Store in data/mapping/ folder
+
     Done
 ```
 
@@ -133,16 +204,24 @@ kanban
 ```mermaid
 kanban
     Epics
-        (Epic 1: As a Data Analyst/Scientist, I want to be able to access the property prices data, so that it can be transformed ready for analysis.)
-        (Epic 2: As a Data Analyst/Scientist, I want to be able to access clean, standardised, enriched and aggregated property prices data, so that it can be analysed easier.)
-        (Epic 3: As a Data Analyst/Scientist, I want to be able to access the extracted, transformed data in a single SQL table, so that analysis can be done on property prices in the UK.)
-        (Epic 4: As the product user, I want to be able to access the extracted, transformed data in through a user-friendly interface, so that insights on property prices in the UK can be easily visualised.)
-    (Epic 2 Story 1: As a Data Analyst/Scientist, I want to be able to access the property prices data, so that it can be transformed ready for analysis.)
-        Task 1: Portion off a section of data, e.g. 15k rows
-        Task 2: Mess data up for cleaning and transform as original data is cleaned already - Courtesy of HM Land Registry -
-        Task 3: Check for null values
-        Task 4: Check for duplicates
-        Task 5: Check the timestamp variable and extract a column "month" and "year"
+        (Epic 1: As a Data Analyst/Scientist, I want to have a robust extraction process that can download, track, and store UK property price data and supporting geospatial data, so that the ETL pipeline can reliably maintain both full historical records and monthly updates ready for transformation, analysis, and visualisation.)
+
+        (Epic 2: As a Data Analyst/Scientist, I want to have raw property price datasets transformed and standardised the so that they are clean, consistent, and geospatially compatible with the GeoJSON location data, so that the data can be reliably joined, visualised, and analysed within the Streamlit application and future machine learning models.)
+
+        (Epic 3: As a Data Analyst/Scientist, I want the extracted and transformed property price data to be loaded into a single, well-structured SQL table, so that I can efficiently query, analyse, and generate insights on UK property prices.)
+
+        (Epic 4: As a Property Pulse UK user, I want to access the extracted and transformed property price data through an intuitive, interactive interface, so that I can easily search, explore, and visualise property price trends across the UK.)
+
+    (E2 Story 1: As a Data Analyst/Scientist, I want to have clean, validated, and standardised property price dataset — including dates, currency, categories, and location identifiers, so that the data is accurate, consistent, and ready for reliable analysis and visualisation.)
+        Task 1:
+        Task 2:
+        Task 3:
+
+    (E2 Story 2: As a Data Analyst/Scientist, I want to have access to a single dataset with monthly updates merged into the historical dataset and enrich each record with spatial identifiers, so that the dataset remains complete, up-to-date, and ready for geospatial analysis.)
+        Task 1:
+        Task 2:
+        Task 3:
+
     Done
         
 ```
