@@ -195,12 +195,16 @@ kanban
 
     (E1 Story 3: As a Data Analyst/Scientist, I want to have access to stored extracted property data in an efficient, organised format, so that the data can be read quickly and easily by downstream processes.)
         Task 3.1: Convert CSV to Parquet for performance
-        Task 3.2: Organise data into folder structure in "data/raw/YYYY-MM" format
         Task 3.3: Add logging for extract step as best practice
-        Task 3.4: Add inline comments as best practice
         Task 3.5: Add docstrings for each function as best practice
-        Task 3.6: Add testing
-
+        Task 3.6: Unit test: extract.py
+        Task 3.6: Unit test: fetch_data.py
+        Task 3.6: Unit test: fetch_geojson.py
+        Task 3.6: Unit test: date_utils.py
+        Task 3.6: Unit test: state_utils.py
+        Task 3.6: Unit test: geojson_utils.py
+        Task 3.6: Unit test: path_resolve_utils.py
+        
     Done
         Task 1.1: Create Python script to ingest CSV from data source using stream=True
         Task 1.2: Implement logic that will store the downloaded file as a temp file and replace if process successful
@@ -211,6 +215,8 @@ kanban
         Task 1.7: Task 7: Add helper script to return -resolve- output path and url based on full_done
         Task 2.1: Fetch GeoJSON from source
         Task 2.2: Store in "data/mapping/" folder
+        Task 3.2: Organise pp data into folder structure in "data/raw/YYYY-MM" format
+        Task 3.4: Add inline comments as best practice
      
 ```
 
