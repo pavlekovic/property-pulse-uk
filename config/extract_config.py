@@ -8,8 +8,8 @@ FULL_FILENAME = "pp_complete.csv"
 MONTHLY_URL = "http://prod.publicdata.landregistry.gov.uk.s3-website-eu-west-1.amazonaws.com/pp-monthly-update-new-version.csv"
 MONTHLY_FILENAME = "pp_monthly.csv"
 
-# Base path: go three levels up from this config file
-BASE_DIR = Path(__file__).resolve().parents[3]
+# Base path: go two levels up from this config file
+BASE_DIR = Path(__file__).resolve().parents[1]
 
 # Raw files directory
 RAW_DIR = BASE_DIR / "data" / "raw"
@@ -27,9 +27,9 @@ STATE_FILE = RAW_DIR / "_state.json"
 
 # Log settings
 LOG_FILE_EXTRACT = BASE_DIR / "logs" / "extract.log"
-LOG_FILE_TRANSFORM = BASE_DIR / "logs" / "transform.log"
-LOG_FILE_LOAD = BASE_DIR / "logs" / "load.log"
-LOG_FILE_STREAMLIT = BASE_DIR / "logs" / "streamlit.log"
+#LOG_FILE_TRANSFORM = BASE_DIR / "logs" / "transform.log"
+#LOG_FILE_LOAD = BASE_DIR / "logs" / "load.log"
+#LOG_FILE_STREAMLIT = BASE_DIR / "logs" / "streamlit.log"
 
 # Download details
 CHUNK_SIZE = 1024 * 128   # 128 KB

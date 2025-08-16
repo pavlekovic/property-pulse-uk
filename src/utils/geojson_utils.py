@@ -1,5 +1,5 @@
 from pathlib import Path
-from fetch_geojson import fetch_ons_geojson
+from src.etl.extract.fetch_geojson import fetch_ons_geojson
 
 def ensure_geojson_once(state: dict, mapping_dir: Path, geojson_path: Path, geojson_url: str, timeout: int):
 
