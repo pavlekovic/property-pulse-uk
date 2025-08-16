@@ -3,7 +3,8 @@ from pathlib import Path
 
 # Returns path to downloaded file
 def stream_download(url: str, output_path: Path, chunk_size: int, timeout: int) -> Path:
-
+    """Download a file in streaming mode and save to disk."""
+    
     # Make sure the destination folder exists
     output_path.parent.mkdir(parents=True, exist_ok=True)
     

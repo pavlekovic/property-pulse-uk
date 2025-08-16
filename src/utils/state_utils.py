@@ -10,6 +10,7 @@ DEFAULT_STATE = {
 
 # Read the current state from the JSON file
 def read_state(state_file: Path):
+    """Return the saved state from JSON or a default state if none exists."""
     
     # If running for the first time return default state
     if not state_file.exists():
@@ -20,6 +21,7 @@ def read_state(state_file: Path):
         return json.load(f)
 
 def write_state (state_file: Path, state: dict):
+    """Write the given state dictionary to a JSON file safely using a temp file."""
     
     # Make sure the destination folder exists
     state_file.parent.mkdir(parents=True, exist_ok=True)

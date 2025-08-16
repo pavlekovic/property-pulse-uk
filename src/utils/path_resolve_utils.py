@@ -1,7 +1,6 @@
 from pathlib import Path
 from src.utils.date_utils import last_month_ym
 
-
 def resolve_url_and_out_path (
     full_done: bool,
     raw_dir: Path,
@@ -10,6 +9,8 @@ def resolve_url_and_out_path (
     full_filename: str,
     monthly_filename: str,
 ):
+    """Return the appropriate URL and output path based on full or monthly run."""
+    
     # If the state is DEFAULT_STATE (full_done = False)
     if not full_done:
         # First run
