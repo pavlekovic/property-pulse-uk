@@ -25,6 +25,12 @@ OUTPUT_PATH = RAW_DIR / "pp_complete.csv"
 # State file
 STATE_FILE = RAW_DIR / "_state.json" 
 
+# Log settings
+LOG_FILE_EXTRACT = BASE_DIR / "logs" / "extract.log"
+LOG_FILE_TRANSFORM = BASE_DIR / "logs" / "transform.log"
+LOG_FILE_LOAD = BASE_DIR / "logs" / "load.log"
+LOG_FILE_STREAMLIT = BASE_DIR / "logs" / "streamlit.log"
+
 # Download details
 CHUNK_SIZE = 1024 * 128   # 128 KB
 TIMEOUT = 60              # in seconds
