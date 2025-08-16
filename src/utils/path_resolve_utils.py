@@ -1,5 +1,5 @@
 from pathlib import Path
-from date_utils import last_month_ym
+from src.utils.date_utils import last_month_ym
 
 
 def resolve_url_and_out_path (
