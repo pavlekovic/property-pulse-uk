@@ -2,10 +2,10 @@ from pathlib import Path
 from src.etl.extract.fetch_geojson import fetch_ons_geojson
 
 def ensure_geojson_once(state: dict, mapping_dir: Path, geojson_path: Path, geojson_url: str, timeout: int):
-
+    """Ensure the GeoJSON file is fetched once, updating state if needed."""
+    
     # Check if file exists and state is True (so that there are no unnecessary get requests)
     if state.get("geojson_fetched") and geojson_path.exists():
-        print(f"[extract] GeoJSON already fetched: {geojson_path}")
         return state
 
     # Make sure the destination folder exists

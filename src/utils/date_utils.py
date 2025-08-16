@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 
 def last_month_ym ():
+    """Return last calendar month as a YYYY-MM string."""
     
     # log today's date
     today = datetime.now()

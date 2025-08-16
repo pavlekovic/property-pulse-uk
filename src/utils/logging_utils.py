@@ -2,7 +2,7 @@ import logging
 from pathlib import Path
 
 def _ensure_log_directory(base_path=None):
-    """Ensure the logs directory exists."""
+    """Create and return the logs directory under the project root if it does not exist."""
     root_dir = Path(__file__).resolve().parents[2]
     #project_root = Path(base_path).resolve().parents[2]
     log_directory = root_dir / "logs"
@@ -56,7 +56,6 @@ def setup_logger(name, log_file, level=logging.DEBUG, base_path="logs"):
         logger.addHandler(console_handler)
     
     return logger
-
 
 def log_extract_success(logger, type, shape, execution_time, expected_rate):
     logger.setLevel(logging.INFO)

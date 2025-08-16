@@ -2,6 +2,7 @@ import requests
 from pathlib import Path
 
 def fetch_ons_geojson(query_url: str, output_path: Path, timeout: int):
+    """Fetch GeoJSON from ArcGIS API and save to a local file."""
     
     # Define parameters for the get request
     params = {

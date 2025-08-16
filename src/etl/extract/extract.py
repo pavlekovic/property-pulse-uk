@@ -12,7 +12,10 @@ from config.extract_config import (FULL_URL, MONTHLY_URL, RAW_DIR,CHUNK_SIZE, TI
 logger = setup_logger("extract", "extract.log")
 
 # Master extract function
-def run() -> int:
+def extract() -> int:
+    
+    """Run the extract step: fetch GeoJSON, fetch full/monthly CSV, and update state."""
+    
     try:
         logger.info("=== EXTRACT STARTED ===")
         
@@ -96,4 +99,4 @@ def run() -> int:
         return 1
 
 if __name__ == "__main__":
-    sys.exit(run())
+    sys.exit(extract())
