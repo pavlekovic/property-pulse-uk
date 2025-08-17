@@ -195,8 +195,6 @@ kanban
 
     (E1 Story 3: As a Data Analyst/Scientist, I want to have access to stored extracted property data in an efficient, organised format, so that the data can be read quickly and easily by downstream processes.)
         Task 3.5: Unit test: extract.py
-        Task 3.6: Unit test: fetch_data.py
-        Task 3.7: Unit test: fetch_geojson.py
         Task 3.8: Unit test: date_utils.py
         Task 3.9: Unit test: state_utils.py
         Task 3.10: Unit test: geojson_utils.py
@@ -216,6 +214,8 @@ kanban
         Task 3.2: Add inline comments as best practice
         Task 3.3: Add logging for extract step as best practice
         Task 3.4: Add docstrings for each function as best practice
+        Task 3.6: Unit test: fetch_data.py
+        Task 3.7: Unit test: fetch_geojson.py
      
 ```
 
