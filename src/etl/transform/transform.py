@@ -12,7 +12,7 @@ from config.transform_config import (RAW_DIR, FULL_CSV, MONTHLY_FILENAME, TRANS_
 from src.utils.logging_utils import setup_logger
 
 # Initialize logger
-logger = setup_logger(name="extract", log_file="extract.log")
+logger = setup_logger(name="transform", log_file="transform.log")
 
 def transform() -> int:
     """Transform raw CSV to partitioned Parquet with basic cleaning."""
@@ -20,6 +20,8 @@ def transform() -> int:
     spark = None
     
     try:
+        logger.info("=== TRANSFORM STARTED ===")
+        
         # Load info from state JSON file
         state = read_state(STATE_FILE)
         
@@ -31,19 +33,23 @@ def transform() -> int:
         if use_full_csv:
             csv_path = Path(FULL_CSV)
             first_load = True                      # overwrite entire Parquet dataset
+            logger.info(f"Mode=FULL (first_load={first_load}); csv_path={csv_path}")
         else:
             ym = last_month or last_month_ym()     # fallback to computed last month if missing
             csv_path = RAW_DIR / ym / MONTHLY_FILENAME
             first_load = False                     # dynamic partition overwrite (only that month)
+            logger.info(f"Mode=MONTHLY (first_load={first_load}); ym={ym}; csv_path={csv_path}")
 
         # Check that input exists
         if not csv_path.exists():
-            raise FileNotFoundError(f"Input CSV not found: {csv_path}")
+            logger.error(f"Input CSV not found: {csv_path}")
+            return 1
         
         # Spark + schema
         spark = create_spark()
         spark.sparkContext.setLogLevel("ERROR")     # Turn off all unnecessary console messages
         schema = pp_schema()
+        logger.info("Spark session created and schema loaded.")
         
         # Read CSV
         df = (spark.read
@@ -55,6 +61,8 @@ def transform() -> int:
               .schema(schema)
               .csv(str(csv_path)))
         
+        logger.info(f"Read from CSV complete.")
+        
         # Transform
         df = standardize_data(df)
         before = simple_report(df)
@@ -64,10 +72,14 @@ def transform() -> int:
         after = simple_report(df)
         
         # Write parquet
+        logger.info(f"Writing Parquet to {TRANS_DIR} (first_load={first_load})...")
         format_to_parquet(df, TRANS_DIR, first_load=first_load)
+        logger.info("Write complete.")
 
-        print("[transform] before:", before)
-        print("[transform] after:", after)
+        logger.info(f"Data (before): {before}")
+        logger.info(f"Data (after): {after}")
+        
+        logger.info("=== TRANSFORM COMPLETED ===")
         
         return 0
     
@@ -79,9 +91,9 @@ def transform() -> int:
         if spark is not None:
             try:
                 spark.stop()
-                print("[transform] Spark session stopped")
+                logger.info("Spark session stopped.")
             except Exception:
-                pass
+                logger.warning("Spark session stop raised, continuing.", exc_info=True)
         
 if __name__ == "__main__":
     sys.exit(transform())
