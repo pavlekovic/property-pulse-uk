@@ -236,9 +236,7 @@ kanban
         (Epic 4: As a Property Pulse UK user, I want to access the extracted and transformed property price data through an intuitive, interactive interface, so that I can easily search, explore, and visualise property price trends across the UK.)
 
     (E2 Story 1: As a Data Analyst/Scientist, I want to have clean, validated, and standardised property price dataset — including dates, currency, categories, and location identifiers, so that the data is accurate, consistent, and ready for reliable analysis and visualisation.)
-        Task 1.1: Convert CSV to Parquet for performance
-        Task 1.2:
-        Task 1.3:
+        No tasks left.
 
     (E2 Story 2: As a Data Analyst/Scientist, I want to have access to a single dataset with monthly updates merged into the historical dataset and enrich each record with spatial identifiers, so that the dataset remains complete, up-to-date, and ready for geospatial analysis.)
         Task 2.1:
@@ -246,5 +244,13 @@ kanban
         Task 2.3:
 
     Done
+        Task 1.1: Convert CSV to Parquet for performance
+        Task 1.2: Implement full vs. monthly logic for CSV transform
+        Task 1.3: Add logging in transform.py
+        Task 1.4: Check for null values
+        Task 1.5: Check for duplicate rows
+        Task 1.6: Create schema for parquet file
+        Task 1.7: Standardize datetime column
+        Task 1.8: Standardize postcode column
         
 ```
