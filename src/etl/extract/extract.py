@@ -9,7 +9,7 @@ from config.extract_config import (FULL_URL, MONTHLY_URL, RAW_DIR,CHUNK_SIZE, TI
     STATE_FILE, FULL_FILENAME, MONTHLY_FILENAME, MAPPING_DIR, GEOJSON_PATH, GEOJSON_API_URL)
 
 # Initialize logger
-logger = setup_logger("extract", "extract.log")
+logger = setup_logger(name="extract", log_file="extract.log")
 
 # Master extract function
 def extract() -> int:

@@ -9,6 +9,10 @@ from src.utils.state_utils import read_state
 from src.utils.date_utils import last_month_ym
 from src.utils.pyspark_utils import create_spark
 from config.transform_config import (RAW_DIR, FULL_CSV, MONTHLY_FILENAME, TRANS_DIR, STATE_FILE)
+from src.utils.logging_utils import setup_logger
+
+# Initialize logger
+logger = setup_logger(name="extract", log_file="extract.log")
 
 def transform() -> int:
     """Transform raw CSV to partitioned Parquet with basic cleaning."""
