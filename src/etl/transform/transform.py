@@ -79,8 +79,6 @@ def transform() -> int:
         logger.info(f"Data (before): {before}")
         logger.info(f"Data (after): {after}")
         
-        logger.info("=== TRANSFORM COMPLETED ===")
-        
         return 0
     
     except Exception as e:
@@ -92,6 +90,7 @@ def transform() -> int:
             try:
                 spark.stop()
                 logger.info("Spark session stopped.")
+                logger.info("=== TRANSFORM COMPLETED ===")
             except Exception:
                 logger.warning("Spark session stop raised, continuing.", exc_info=True)
         
