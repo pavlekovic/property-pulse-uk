@@ -238,11 +238,6 @@ kanban
     (E2 Story 1: As a Data Analyst/Scientist, I want to have clean, validated, and standardised property price dataset — including dates, currency, categories, and location identifiers, so that the data is accurate, consistent, and ready for reliable analysis and visualisation.)
         No tasks left.
 
-    (E2 Story 2: As a Data Analyst/Scientist, I want to have access to a single dataset with monthly updates merged into the historical dataset and enrich each record with spatial identifiers, so that the dataset remains complete, up-to-date, and ready for geospatial analysis.)
-        Task 2.1:
-        Task 2.2:
-        Task 2.3:
-
     Done
         Task 1.1: Convert CSV to Parquet for performance
         Task 1.2: Implement full vs. monthly logic for CSV transform
@@ -252,5 +247,35 @@ kanban
         Task 1.6: Create schema for parquet file
         Task 1.7: Standardize datetime column
         Task 1.8: Standardize postcode column
+        
+```
+
+### EPIC 3 User stories and tasks
+
+```mermaid
+kanban
+    Epics
+        (Epic 1: As a Data Analyst/Scientist, I want to have a robust extraction process that can download, track, and store UK property price data and supporting geospatial data, so that the ETL pipeline can reliably maintain both full historical records and monthly updates ready for transformation, analysis, and visualisation.)
+
+        (Epic 2: As a Data Analyst/Scientist, I want to have raw property price datasets transformed and standardised the so that they are clean, consistent, and geospatially compatible with the GeoJSON location data, so that the data can be reliably joined, visualised, and analysed within the Streamlit application and future machine learning models.)
+
+        (Epic 3: As a Data Analyst/Scientist, I want the extracted and transformed property price data to be loaded into a single, well-structured SQL table, so that I can efficiently query, analyse, and generate insights on UK property prices.)
+
+        (Epic 4: As a Property Pulse UK user, I want to access the extracted and transformed property price data through an intuitive, interactive interface, so that I can easily search, explore, and visualise property price trends across the UK.)
+
+    (E3 Story 1: As a Data Analyst/Scientist, I want to have clean, validated, and standardised property price dataset — including dates, currency, categories, and location identifiers, so that the data is accurate, consistent, and ready for reliable analysis and visualisation.)
+        No tasks left.
+
+    (E3 Story 2: As a Data Engineer, I want DB credentials and target names sourced from .env file, so that they can be easily changed if switching between environments.)
+        No tasks left.
+
+    Done
+        Task 1.1: Read parquet file with a configurable row limit - 10k
+        Task 1.2: Build DB URL from .env, or use TARGET_DB_URL if present, and create a SQLAlchemy engine
+        Task 1.3: Write data to Postgres
+        Task 1.4: Implement logging
+        Task 2.1: Read TARGET_DB_* pieces from .env and compose URL with util function
+        Task 2.2: Provide get_target to read TARGET_DB_SCHEMA and TARGET_DB_TABLE
+        Task 2.3: Ensure .env is git-ignored
         
 ```
