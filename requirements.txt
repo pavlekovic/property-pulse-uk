@@ -46,6 +46,7 @@ protobuf==6.31.1
 psutil==6.1.1
 psycopg==3.2.9
 psycopg-binary==3.2.9
+psycopg2-binary==2.9.10
 ptyprocess==0.7.0
 pure_eval==0.2.3
 py4j==0.10.9.7
@@ -56,6 +57,7 @@ pyspark==3.5.4
 pytest==8.4.1
 pytest-cov==6.2.1
 python-dateutil==2.9.0.post0
+python-dotenv==1.1.1
 pytz==2024.2
 pyzmq==26.2.0
 referencing==0.36.2
@@ -63,6 +65,7 @@ requests==2.32.4
 rpds-py==0.27.0
 six==1.17.0
 smmap==5.0.2
+SQLAlchemy==2.0.43
 stack-data==0.6.3
 streamlit==1.48.0
 tenacity==9.1.2
