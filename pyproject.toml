@@ -1,0 +1,12 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "property_pulse_uk"
+version = "0.1.0"
+description = "Property Pulse UK"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["app*", "config*", "src*"]

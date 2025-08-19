@@ -3,7 +3,7 @@ from pathlib import Path
 from src.etl.transform.schema import pp_schema
 from src.etl.transform.validate import simple_report
 from src.etl.transform.format import format_to_parquet
-from src.etl.transform.marts import fact_avg_monthly_ptype, fact_avg_monthly_district, write_partitioned, last_5_yrs_window, bounds_years, write_single
+from src.etl.transform.marts import fact_avg_yearly_ptype, fact_avg_yearly_district, write_partitioned, last_5_yrs_window, bounds_years, write_single
 from src.etl.transform.clean import standardize_data, remove_bad_rows, drop_duplicates
 from src.utils.state_utils import read_state
 from src.utils.read_utils import read_input
@@ -87,19 +87,19 @@ def transform() -> int:
         df = read_input(engine="spark", spark=spark) # Use read_input, send engine and also spark instance
 
         # FACT: monthly by (district, property_type)
-        print("[marts] Building fact_monthly_prices …")
-        fact_by_type = fact_avg_monthly_ptype(df)
+        print("[marts] Building fact_avg_yearly_ptype …")
+        fact_by_type = fact_avg_yearly_ptype(df)
         write_partitioned(fact_by_type, MART_FACT_BY_TYPE)
         logger.info(f"[marts] Wrote: {MART_FACT_BY_TYPE}")
 
         # FACT: monthly by district
-        print("[marts] Building fact_monthly_prices_district …")
-        fact_by_dist = fact_avg_monthly_district(df)
+        print("[marts] Building fact_avg_yearly_district …")
+        fact_by_dist = fact_avg_yearly_district(df)
         write_partitioned(fact_by_dist, MART_FACT_BY_DISTRICT)
         logger.info(f"[marts] Wrote: {MART_FACT_BY_DISTRICT}")
 
         # AGG: min/max in last 5 years (for UI sliders, prediction bounds)
-        print("[marts] Building agg_bounds_5y …")
+        print("[marts] Building last_5_yrs_window …")
         df5 = last_5_yrs_window(df)
         bounds = bounds_years(df5)
         write_single(bounds, MART_BOUNDS_5Y)
