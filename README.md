@@ -238,6 +238,13 @@ kanban
     (E2 Story 1: As a Data Analyst/Scientist, I want to have clean, validated, and standardised property price dataset — including dates, currency, categories, and location identifiers, so that the data is accurate, consistent, and ready for reliable analysis and visualisation.)
         No tasks left.
 
+    (E2 Story 2: As a Data Analyst/Scientist, I want to have clean, validated, and standardised property price data marts, so that the data is accurate, consistent, and optimized for reliable analysis and visualisation in Streamlit.)
+        Task 2.1: Monthly average price and transaction count by, district, property_type, year, month for price tracker
+        Task 2.2: Monthly average price by, district, year, month for price tracker
+        Task 2.3: Min/Max price in the last 5 years by district for ML model
+        Task 2.4: Write a partitioned parquet - data mart - by (year, month), using dynamic overwrite if incremental
+        Task 2.5: Incorporate with master transform script
+
     Done
         Task 1.1: Convert CSV to Parquet for performance
         Task 1.2: Implement full vs. monthly logic for CSV transform
