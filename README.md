@@ -254,7 +254,7 @@ kanban
         Task 2.2: Data mart: Monthly average price by, district, year, month for price tracker
         Task 2.3: Min/Max price in the last 5 years by district for ML model
         Task 2.4: Write a partitioned parquet - data mart - by year and month, using dynamic overwrite if incremental
-        Task 2.5: Incorporate with master transform script
+        Task 2.5: Incorporate marts.py with master transform script
         
 ```
 
