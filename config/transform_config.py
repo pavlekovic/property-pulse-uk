@@ -12,3 +12,9 @@ MONTHLY_FILENAME = "pp_monthly.csv"
 
 # State file
 STATE_FILE = RAW_DIR / "_state.json" 
+
+# Data marts
+MARTS_DIR = DATA_DIR / "marts"
+MART_FACT_BY_TYPE = MARTS_DIR / "fact_monthly_prices"             # partitioned by year,month
+MART_FACT_BY_DISTRICT = MARTS_DIR / "fact_monthly_prices_district"    # partitioned by year,month
+MART_BOUNDS_5Y = MARTS_DIR / "agg_bounds_5y"           # small -> single file is fine
