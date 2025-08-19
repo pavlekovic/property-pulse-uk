@@ -250,8 +250,8 @@ kanban
         Task 1.6: Create schema for parquet file
         Task 1.7: Standardize datetime column
         Task 1.8: Standardize postcode column
-        Task 2.1: Monthly average price and transaction count by, district, property_type, year, month for price tracker
-        Task 2.2: Monthly average price by, district, year, month for price tracker
+        Task 2.1: Data mart: Monthly average price and transaction count by, district, property_type, year, month for price tracker
+        Task 2.2: Data mart: Monthly average price by, district, year, month for price tracker
         Task 2.3: Min/Max price in the last 5 years by district for ML model
         Task 2.4: Write a partitioned parquet - data mart - by year and month, using dynamic overwrite if incremental
         Task 2.5: Incorporate with master transform script

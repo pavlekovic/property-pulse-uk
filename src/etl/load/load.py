@@ -1,7 +1,7 @@
 import sys
 import pandas as pd
 from src.etl.load.db import get_engine, get_target
-from src.etl.load.read import read_input
+from src.utils.read_utils import read_input
 from src.utils.logging_utils import setup_logger
 
 # Initialize logger
@@ -15,13 +15,15 @@ def load() -> int:
         logger.info("=== LOAD STARTED ===")
         
         # Read data (Parquet preferred)
-        df = read_input(limit=10_000)
+        df = read_input(limit=10_000, engine="pandas")
 
         # Load to Postgres (creates table automatically if missing)
         engine = get_engine()
         schema, table = get_target()
 
         logger.info(f"Loading {len(df)} rows into {schema}.{table} …")
+        
+        # Write to sql table
         df.to_sql(
             name=table,
             con=engine,
