@@ -11,24 +11,11 @@ def last_5_yrs_window(df: DataFrame) -> DataFrame:
     """Filter rows to the last 5 years based on max(transfer_date)."""
     max_date = df.select(sf_max(col("transfer_date")).alias("maxd")).first()["maxd"]
     cutoff_expr = add_months(lit(max_date), -60)  # 5 years = 60 months
-<<<<<<< HEAD
     return df.filter(col("transfer_date") >= cutoff_expr)
-=======
-    return (
-        df.filter(col("transfer_date") >= cutoff_expr)
-          .filter(upper(trim(col("property_type"))) != lit("O"))
-    )
->>>>>>> 8da5b2f (Add/update .gitignore)
 
 # Calc average price per property type
 def fact_avg_yearly_ptype (df: DataFrame) -> DataFrame:
     """Yearly average price and transaction count by (district, property_type, year)."""
-<<<<<<< HEAD
-=======
-    
-    # Remove property "other" to exclude land sales etc
-    #df_clean = df.filter(upper(trim(col("property_type"))) != lit("O"))
->>>>>>> 8da5b2f (Add/update .gitignore)
     
     # Define groups to use for grouping
     group_keys = ["district", "property_type", "year"]
@@ -44,12 +31,6 @@ def fact_avg_yearly_ptype (df: DataFrame) -> DataFrame:
 def fact_avg_yearly_district (df: DataFrame) -> DataFrame:
     """Yearly average price by (district, year)."""
     
-<<<<<<< HEAD
-=======
-    # Remove property "other" to exclude land sales etc
-    #df_clean = df.filter(upper(trim(col("property_type"))) != lit("O"))
-    
->>>>>>> 8da5b2f (Add/update .gitignore)
     group_keys = ["district", "year"]
     fact = (
         df.groupBy(*group_keys).agg(
