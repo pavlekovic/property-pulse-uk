@@ -5,6 +5,7 @@ from config.streamlit_config import MART_FACT_BY_DISTRICT
 
 st.title("Price Tracker")
 
+# Cache data so that Streamlit does not load on every run
 @st.cache_data
 def load_yearly():
     df = pd.read_parquet(MART_FACT_BY_DISTRICT)
@@ -16,22 +17,31 @@ def load_yearly():
 
 df = load_yearly()
 
+# Define a list of years for slider
 years = sorted(df["year"].dropna().unique().tolist())
-districts = sorted(df["district"].dropna().unique().tolist() if "district" in df.columns
-                   else df["district_name"].dropna().unique().tolist())
 
+# Define list of districts for the dropdown
+districts = sorted(df["district"].dropna().unique().tolist())
+
+# Sidebar filters
 with st.sidebar:
     st.subheader("Filters")
     year_min, year_max = int(min(years)), int(max(years))
+    
+    # Show year slider
     year_range = st.slider("Years", min_value=year_min, max_value=year_max, value=(year_min, year_max))
-    chosen = st.multiselect("Districts (max 10)", districts, default=districts[:5], max_selections=10)
+    
+    # Show dropdown box
+    chosen = st.multiselect("Districts (max 5)", districts, default=None, max_selections=5)
 
-name_col = "district" if "district" in df.columns else "district_name"
+name_col = "district"
+
 mask = (
     df["year"].between(year_range[0], year_range[1]) &
-    df[name_col].isin(chosen)
+    df["district"].isin(chosen)
 )
-plot_df = df.loc[mask].sort_values([name_col, "year"])
+
+plot_df = df.loc[mask].sort_values(["district", "year"])
 
 chart = (
     alt.Chart(plot_df)
@@ -40,7 +50,7 @@ chart = (
         x=alt.X("year:O", title="Year"),
         y=alt.Y("avg_price:Q", title="Average Price (£)"),
         color=alt.Color(f"{name_col}:N", title="District"),
-        tooltip=[name_col, "year", "avg_price"]
+        tooltip=["district", "year", "avg_price"]
     )
     .properties(height=600)
 )
