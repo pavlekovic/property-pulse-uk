@@ -1,24 +1,19 @@
 import streamlit as st
 import pandas as pd
-from config.streamlit_config import MART_FACT_BY_DISTRICT
 from app.streamlit.lib.viz import price_lines
+from app.streamlit.lib.io import load_fact_by_district
 
 st.title("Price Tracker")
+st.set_page_config(page_title="Price Tracker", layout="wide")
 
-# Cache data so that Streamlit does not load on every run
-@st.cache_data
-def load_yearly():
-    df = pd.read_parquet(MART_FACT_BY_DISTRICT)
-    # ensure numeric
-    for c in ("year", "avg_price"):
-        if c in df.columns:
-            df[c] = pd.to_numeric(df[c], errors="coerce")
-    return df
-
-df = load_yearly()
+# Load data
+df = load_fact_by_district()
 
 # Define a list of years for slider
 years = sorted(df["year"].dropna().unique().tolist())
+
+# Define a a list of property types to choose from
+property_filter = sorted(df["property_type"].dropna().unique()) + ["All"]
 
 # Define list of districts for the dropdown
 districts = sorted(df["district"].dropna().unique().tolist())
@@ -31,20 +26,22 @@ with st.sidebar:
     # Show year slider
     year_range = st.slider("Years", min_value=year_min, max_value=year_max, value=(year_min, year_max))
     
-    # Show dropdown box
-    chosen = st.multiselect("Districts (max 5)", districts, max_selections=5)
-
-name_col = "district"
+    # Show property selector
+    property_types = st.radio("Property type", property_filter, horizontal=True)
+    
+    # Show dropdown box for districts
+    district_filter = st.multiselect("Districts (max 5)", districts, max_selections=5)
 
 mask = (
     df["year"].between(year_range[0], year_range[1]) &
-    df["district"].isin(chosen)
+    df["district"].isin(district_filter) &
+    (df["property_type"] == property_types)
 )
 
 plot_df = df.loc[mask].sort_values(["district", "year"])
 
 if plot_df.empty:
-    st.info("No data matches your filters.")
+    st.info("Select at least one district.")
 else:
     chart = price_lines(plot_df, name_col="district")
     st.altair_chart(chart, use_container_width=True)
