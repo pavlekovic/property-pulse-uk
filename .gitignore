@@ -208,4 +208,4 @@ __marimo__/
 
 # Don't accept any files in the /data or /mapping folder, but keep the folder
 data/raw/*
-#data/mapping/*
+data/transformed/*

@@ -86,13 +86,21 @@ def transform() -> int:
         logger.info(f"[marts] Reading cleaned dataset from: {TRANS_DIR}")
         df = read_input(engine="spark", spark=spark) # Use read_input, send engine and also spark instance
 
+<<<<<<< HEAD
         # FACT: monthly by (district, property_type)
+=======
+        # FACT: yearly by (district, property_type)
+>>>>>>> 8da5b2f (Add/update .gitignore)
         print("[marts] Building fact_avg_yearly_ptype …")
         fact_by_type = fact_avg_yearly_ptype(df)
         write_partitioned(fact_by_type, MART_FACT_BY_TYPE)
         logger.info(f"[marts] Wrote: {MART_FACT_BY_TYPE}")
 
+<<<<<<< HEAD
         # FACT: monthly by district
+=======
+        # FACT: yearly by district
+>>>>>>> 8da5b2f (Add/update .gitignore)
         print("[marts] Building fact_avg_yearly_district …")
         fact_by_dist = fact_avg_yearly_district(df)
         write_partitioned(fact_by_dist, MART_FACT_BY_DISTRICT)
