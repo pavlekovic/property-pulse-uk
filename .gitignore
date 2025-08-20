@@ -14,7 +14,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+#lib/ # I actually need lib to be updated
 lib64/
 parts/
 sdist/
