@@ -3,14 +3,14 @@ from pathlib import Path
 from src.etl.transform.schema import pp_schema
 from src.etl.transform.validate import simple_report
 from src.etl.transform.format import format_to_parquet
-from src.etl.transform.marts import fact_avg_yearly_ptype, fact_avg_yearly_district, write_partitioned, last_5_yrs_window, bounds_years, write_single
+from src.etl.transform.marts import fact_avg_yearly_ptype, fact_prediction, write_partitioned, last_5_yrs_window, bounds_years, write_single
 from src.etl.transform.clean import standardize_data, remove_bad_rows, drop_duplicates
 from src.utils.state_utils import read_state
 from src.utils.read_utils import read_input
 from src.utils.date_utils import last_month_ym
 from src.utils.pyspark_utils import create_spark
 from config.transform_config import (RAW_DIR, FULL_CSV, MONTHLY_FILENAME, TRANS_DIR, STATE_FILE)
-from config.transform_config import (TRANS_DIR, MART_FACT_BY_TYPE, MART_FACT_BY_DISTRICT, MART_BOUNDS_5Y)
+from config.transform_config import (TRANS_DIR, MART_FACT_BY_TYPE, MART_PREDICTION, MART_BOUNDS_5Y)
 from src.utils.logging_utils import setup_logger
 
 # Initialize logger
@@ -87,19 +87,17 @@ def transform() -> int:
         df = read_input(engine="spark", spark=spark) # Use read_input, send engine and also spark instance
 
         # FACT: yearly by (district, property_type)
-        print("[marts] Building fact_avg_yearly_ptype …")
         fact_by_type = fact_avg_yearly_ptype(df)
         write_partitioned(fact_by_type, MART_FACT_BY_TYPE)
         logger.info(f"[marts] Wrote: {MART_FACT_BY_TYPE}")
 
-        # FACT: yearly by district
-        print("[marts] Building fact_avg_yearly_district …")
-        fact_by_dist = fact_avg_yearly_district(df)
-        write_partitioned(fact_by_dist, MART_FACT_BY_DISTRICT)
-        logger.info(f"[marts] Wrote: {MART_FACT_BY_DISTRICT}")
+        # FACT: single file from 2010 for XGBoost
+        print("[marts] Building fact_prediction …")
+        fact_pred = fact_prediction(df)
+        write_single(fact_pred, MART_PREDICTION)
+        logger.info(f"[marts] Wrote: {MART_PREDICTION}")
 
         # AGG: min/max in last 5 years (for UI sliders, prediction bounds)
-        print("[marts] Building last_5_yrs_window …")
         df5 = last_5_yrs_window(df)
         bounds = bounds_years(df5)
         write_single(bounds, MART_BOUNDS_5Y)
