@@ -42,7 +42,7 @@ chart = (
         color=alt.Color(f"{name_col}:N", title="District"),
         tooltip=[name_col, "year", "avg_price"]
     )
-    .properties(height=420)
+    .properties(height=600)
 )
 
 st.altair_chart(chart, use_container_width=True)
