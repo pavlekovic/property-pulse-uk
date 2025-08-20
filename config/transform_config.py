@@ -15,6 +15,6 @@ STATE_FILE = RAW_DIR / "_state.json"
 
 # Data marts
 MARTS_DIR = DATA_DIR / "marts"
-MART_FACT_BY_TYPE = MARTS_DIR / "fact_prices"             # partitioned by year,month
-MART_FACT_BY_DISTRICT = MARTS_DIR / "fact_prices_district"    # partitioned by year,month
-MART_BOUNDS_5Y = MARTS_DIR / "agg_bounds_5y"           # small -> single file is fine
+MART_FACT_BY_TYPE = MARTS_DIR / "fact_prices"             # partitioned by year
+MART_PREDICTION = MARTS_DIR / "fact_prediction"           # single file
+MART_BOUNDS_5Y = MARTS_DIR / "agg_bounds_5y"              # single file
