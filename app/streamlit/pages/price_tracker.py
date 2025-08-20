@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
-import altair as alt
 from config.streamlit_config import MART_FACT_BY_DISTRICT
+from app.streamlit.lib.viz import price_lines
 
 st.title("Price Tracker")
 
@@ -32,7 +32,7 @@ with st.sidebar:
     year_range = st.slider("Years", min_value=year_min, max_value=year_max, value=(year_min, year_max))
     
     # Show dropdown box
-    chosen = st.multiselect("Districts (max 5)", districts, default=None, max_selections=5)
+    chosen = st.multiselect("Districts (max 5)", districts, max_selections=5)
 
 name_col = "district"
 
@@ -43,16 +43,8 @@ mask = (
 
 plot_df = df.loc[mask].sort_values(["district", "year"])
 
-chart = (
-    alt.Chart(plot_df)
-    .mark_line(interpolate="monotone", strokeWidth=3)   # <-- smooth & thick
-    .encode(
-        x=alt.X("year:O", title="Year"),
-        y=alt.Y("avg_price:Q", title="Average Price (£)"),
-        color=alt.Color(f"{name_col}:N", title="District"),
-        tooltip=["district", "year", "avg_price"]
-    )
-    .properties(height=600)
-)
-
-st.altair_chart(chart, use_container_width=True)
+if plot_df.empty:
+    st.info("No data matches your filters.")
+else:
+    chart = price_lines(plot_df, name_col="district")
+    st.altair_chart(chart, use_container_width=True)
