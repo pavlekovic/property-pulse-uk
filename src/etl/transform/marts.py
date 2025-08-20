@@ -27,16 +27,13 @@ def fact_avg_yearly_ptype (df: DataFrame) -> DataFrame:
     )
     return fact
 
-# Calc average price per district
-def fact_avg_yearly_district (df: DataFrame) -> DataFrame:
-    """Yearly average price by (district, year)."""
-    
-    group_keys = ["district", "year"]
+# Data mart for XGBoost model
+def fact_prediction (df: DataFrame) -> DataFrame:
+    """Filter raw transactions for prediction dataset, keep only 2010 onwards and required columns."""
+
     fact = (
-        df.groupBy(*group_keys).agg(
-            avg(col("price")).alias("avg_price"), # Average property price in that group
-            count(lit(1)).alias("txn_count"),     # Count transactions in that group
-        )
+        df.filter(col("year") >= 2010)
+          .select("price", "year", "district", "property_type", "new_build", "tenure")
     )
     return fact
 

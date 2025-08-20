@@ -75,9 +75,9 @@ def transform() -> int:
         after = simple_report(df)
         
         # Write parquet
-        logger.info(f"Writing Parquet to {TRANS_DIR} (first_load={first_load})...")
-        format_to_parquet(df, TRANS_DIR, first_load=first_load)
-        logger.info("Write complete.")
+        #logger.info(f"Writing Parquet to {TRANS_DIR} (first_load={first_load})...")
+        #format_to_parquet(df, TRANS_DIR, first_load=first_load)
+        #logger.info("Write complete.")
 
         logger.info(f"Data (before): {before}")
         logger.info(f"Data (after): {after}")
@@ -87,9 +87,9 @@ def transform() -> int:
         df = read_input(engine="spark", spark=spark) # Use read_input, send engine and also spark instance
 
         # FACT: yearly by (district, property_type)
-        fact_by_type = fact_avg_yearly_ptype(df)
-        write_partitioned(fact_by_type, MART_FACT_BY_TYPE)
-        logger.info(f"[marts] Wrote: {MART_FACT_BY_TYPE}")
+        #fact_by_type = fact_avg_yearly_ptype(df)
+        #write_partitioned(fact_by_type, MART_FACT_BY_TYPE)
+        #logger.info(f"[marts] Wrote: {MART_FACT_BY_TYPE}")
 
         # FACT: single file from 2010 for XGBoost
         print("[marts] Building fact_prediction …")
@@ -98,10 +98,10 @@ def transform() -> int:
         logger.info(f"[marts] Wrote: {MART_PREDICTION}")
 
         # AGG: min/max in last 5 years (for UI sliders, prediction bounds)
-        df5 = last_5_yrs_window(df)
-        bounds = bounds_years(df5)
-        write_single(bounds, MART_BOUNDS_5Y)
-        logger.info(f"[marts] Wrote: {MART_BOUNDS_5Y}")
+        #df5 = last_5_yrs_window(df)
+        #bounds = bounds_years(df5)
+        #write_single(bounds, MART_BOUNDS_5Y)
+        #logger.info(f"[marts] Wrote: {MART_BOUNDS_5Y}")
         
         logger.info("[marts] DONE")
         
