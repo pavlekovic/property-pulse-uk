@@ -9,10 +9,10 @@ st.title("Price Map")
 st.set_page_config(page_title="Price Map", layout="wide")
 
 # Load data
-df = load_fact_by_district(columns=("district", "year", "avg_price", "property_type"))
+df = load_fact_by_district()
 
-# Define a list of years for slider
-years = sorted(df["year"].dropna().unique().tolist())
+# Define a list of years for dropdown menu
+years = sorted(df["year"].dropna().unique().tolist(), reverse=True)
 
 # Define a list of districts
 districts = sorted(df["district"].dropna().unique())
@@ -23,7 +23,11 @@ types =  sorted(df["property_type"].dropna().unique()) + ["All"]
 # Sidebar filters
 with st.sidebar:
     st.subheader("Filters")
-    year_filter = st.selectbox("Year", years, index=len(years) - 1 if years else 0)
+    
+    # Show year dropdown
+    year_filter = st.selectbox("Year", years)
+    
+    # Show property selector
     property_filter = st.radio("Property type", types, horizontal=True)
 
 # Filter data for year and property type

@@ -17,14 +17,28 @@ def last_5_yrs_window(df: DataFrame) -> DataFrame:
 def fact_avg_yearly_ptype (df: DataFrame) -> DataFrame:
     """Yearly average price and transaction count by (district, property_type, year)."""
     
-    # Define groups to use for grouping
-    group_keys = ["district", "property_type", "year"]
-    fact = (
-        df.groupBy(*group_keys).agg(
-            avg(col("price")).alias("avg_price"), # Average property price in that group by property type
-            count(lit(1)).alias("txn_count"),     # Count transactions in that group
-          )
+    # Base: by property type
+    fact_ptype = (
+        df.groupBy("district", "property_type", "year").agg(
+            avg(col("price")).alias("avg_price"),
+            count(lit(1)).alias("txn_count"),
+        )
     )
+
+    # Aggregate across *all* property types
+    fact_all = (
+        df.groupBy("district", "year").agg(
+            avg(col("price")).alias("avg_price"),
+            count(lit(1)).alias("txn_count"),
+        )
+        .withColumn("property_type", lit("All"))
+    )
+
+    # Ensure same column order
+    fact_all = fact_all.select("district", "property_type", "year", "avg_price", "txn_count")
+
+    # Union to linked them
+    fact = fact_ptype.unionByName(fact_all)
     return fact
 
 # Data mart for XGBoost model

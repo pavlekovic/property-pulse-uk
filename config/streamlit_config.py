@@ -9,7 +9,7 @@ MAPPING_DIR = DATA_DIR / "mapping"
 
 # Data marts
 MART_PREDICTION = MARTS_DIR / "fact_prediction"
-MART_FACT_BY_DISTRICT = MARTS_DIR / "fact_prices_district"
+MART_FACT_BY_TYPE = MARTS_DIR / "fact_prices"
 MART_BOUNDS_5Y = MARTS_DIR / "agg_bounds_5y.parquet"
 
 # Geojson data
