@@ -1,5 +1,18 @@
 import streamlit as st
 
+st.markdown(
+    """
+    <style>
+    section[data-testid="stSidebar"] h2, 
+    section[data-testid="stSidebar"] h3 {
+        text-transform: none !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+
 st.set_page_config(page_title="Property Pulse UK", layout="wide")
 
 st.title("Property Pulse UK")

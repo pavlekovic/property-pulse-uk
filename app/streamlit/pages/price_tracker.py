@@ -29,8 +29,32 @@ with st.sidebar:
     # Show year slider
     year_range = st.slider("Years", min_value=year_min, max_value=year_max, value=(year_min, year_max))
     
-    # Show property selector
-    property_filter = st.radio("Property type", types, horizontal=True)
+    # Show property type as radio buttons
+    ptype_map = {
+        "All": "All",
+        "D": "Detached",
+        "S": "Semi-Detached",
+        "T": "Terraced",
+        "F": "Flat",
+    }
+    icon_map = {
+        "All": "🔎",
+        "D": "🏡",
+        "S": "🏘️",
+        "T": "🏚️",
+        "F": "🏢",
+    }
+
+    labels = [f"{icon_map[k]} {v}" for k, v in ptype_map.items()]
+    label_to_code = {f"{icon_map[k]} {v}": k for k, v in ptype_map.items()}
+
+    ptype_label = st.radio(
+        "Property type",
+        labels,
+        horizontal=False,
+    )
+
+    property_filter = label_to_code[ptype_label] 
     
     # Show dropdown box for districts
     district_filter = st.multiselect("Districts (max 5)", districts, max_selections=5)

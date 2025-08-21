@@ -106,14 +106,67 @@ cats = artifact["cat_categories"]
 c1, c2, c3, c4, c5 = st.columns(5)
 with c1:
     district = st.selectbox("District", options=cats["district"])
+
 with c2:
-    ptype = st.selectbox("Property type", options=cats["property_type"])
-with c3:
-    new_build = st.radio("New build", options=cats["new_build"], horizontal=True)
-with c4:
-    tenure = st.radio("Tenure", options=cats["tenure"], horizontal=True)
-with c5:
     asking_price = st.number_input("Asking price (£)", min_value=50_000, max_value=5_000_000, step=5_000)
+
+with c3:
+    # Show property type as radio buttons
+    ptype_map = {
+        "D": "Detached",
+        "S": "Semi-Detached",
+        "T": "Terraced",
+        "F": "Flat",
+    }
+    icon_map = {
+        "D": "🏡",
+        "S": "🏘️",
+        "T": "🏚️",
+        "F": "🏢",
+    }
+
+    labels = [f"{icon_map[k]} {v}" for k, v in ptype_map.items()]
+    label_to_code = {f"{icon_map[k]} {v}": k for k, v in ptype_map.items()}
+
+    ptype_label = st.radio(
+        "Property type",
+        labels,
+        horizontal=False,
+    )
+
+    ptype = label_to_code[ptype_label]
+    
+with c4:
+    options = {
+        "N": "No",
+        "Y": "Yes",
+    }
+    
+    labels = list(options.values())
+
+    newbuild_label = st.radio(
+        "New build",
+        labels,
+        horizontal=False,
+    )
+    
+    # Map label back to key
+    new_build = [k for k, v in options.items() if v == newbuild_label][0]
+with c5:
+    options = {
+        "F": "Freehold",
+        "L": "Leasehold",
+    }
+    
+    labels = list(options.values())
+    
+    tenure_label = st.radio(
+        "New build",
+        labels,
+        horizontal=False,
+    )
+    tenure = [k for k, v in options.items() if v == tenure_label][0]
+
 
 st.write("---")
 
@@ -288,7 +341,6 @@ with col2:
     )
 
 # Copyright info
-st.sidebar.markdown("---")
 st.sidebar.markdown(
     """
     <small>
