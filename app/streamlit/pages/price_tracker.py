@@ -48,3 +48,17 @@ if plot_df.empty:
 else:
     chart = price_lines(plot_df, name_col="district")
     st.altair_chart(chart, use_container_width=True)
+
+# Copyright info
+st.sidebar.markdown("---")
+st.sidebar.markdown(
+    """
+    <small>
+    Contains HM Land Registry data © Crown copyright and database right 2021.  
+    Licensed under 
+    <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" target="_blank">
+    OGL v3.0</a>.
+    </small>
+    """,
+    unsafe_allow_html=True
+)
