@@ -1,4 +1,5 @@
 from pyspark.sql import DataFrame
+import geopandas as gpd
 from pyspark.sql.functions import col, to_timestamp, to_date, year, trim, upper, regexp_replace, coalesce, lit
 
 def standardize_data (df: DataFrame) -> DataFrame:
@@ -40,3 +41,13 @@ def drop_duplicates (df:DataFrame) -> DataFrame:
         .dropDuplicates(["transaction_id"])                # Drop rows with the same transaction_id
     )
     return df
+
+
+def clean_geojson (geopath):
+    """Remove geo codes that are not for England or Wales"""
+    
+    gdf = gpd.read_file(geopath)
+    mask = gdf["LAD25CD"].astype(str).str.strip().str.startswith(("E", "W"))
+    gdf[mask].to_file(geopath, driver="GeoJSON")
+    
+    return geopath
