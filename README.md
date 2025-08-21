@@ -15,6 +15,46 @@ The final processed dataset will form the backbone of the Property Pulse UK app,
 
 ---
 
+## Repository Structure
+
+```bash
+├── app
+│   └── streamlit                  # Streamlit web application
+│       ├── pages                  # Additional pages (Price Tracker, Map, Prediction, etc.)
+│       ├── lib                    # Reusable functions/libraries specific to Streamlit
+│       └── home.py                # Landing page
+│
+└── src
+│   ├── etl                        # ETL pipeline scripts
+│   │   ├── extract                # Extract data from source (HM Land Registry CSVs, APIs)
+│   │   ├── load                   # Load cleaned/transformed data into PostgreSQL
+│   │   └── transform              # Clean, enrich, and transform raw datasets
+│   ├── model                      # Machine learning models (training, evaluation, prediction)
+│   └── utils                      # General helper functions (logging, validation, file handling)
+│
+└── data
+│   ├── mapping                    # Mapping tables (e.g., GeoJSON keys, property type codes)
+│   ├── marts                      # Analytical data marts
+│   │   ├── fact_prices            # Fact table of property price transactions for analysis
+│   │   └── fact_prediction        # Fact table of property price transactions for prediction
+│   ├── raw                        # Raw downloaded datasets
+│   └── transformed                # Cleaned & feature-engineered datasets ready for analysis
+│
+└── tests
+│   └── unit_tests                 # Unit tests for ETL, models, and utilities
+│
+└── logs                           # Log files from ETL jobs and ML models
+│
+└── models                         # Saved ML models (Joblib files, trained artifacts)
+│
+└── scripts                        # Automation script (run pipeline)
+│
+└── notebooks                      # Jupyter notebooks for EDA, prototyping, experimentation
+│
+└── config                         # Configuration files (DB connections, credentials, constants)
+```    
+---
+
 ## PROJECT REQUIREMENTS AS AN EPIC
 
 ```text
