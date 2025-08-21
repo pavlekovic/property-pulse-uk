@@ -87,15 +87,15 @@ def transform() -> int:
         df = read_input(engine="spark", spark=spark) # Use read_input, send engine and also spark instance
 
         # FACT: yearly by (district, property_type)
-        #fact_by_type = fact_avg_yearly_ptype(df)
-        #write_partitioned(fact_by_type, MART_FACT_BY_TYPE)
-        #logger.info(f"[marts] Wrote: {MART_FACT_BY_TYPE}")
+        fact_by_type = fact_avg_yearly_ptype(df)
+        write_partitioned(fact_by_type, MART_FACT_BY_TYPE)
+        logger.info(f"[marts] Wrote: {MART_FACT_BY_TYPE}")
 
         # FACT: single file from 2010 for XGBoost
-        print("[marts] Building fact_prediction …")
-        fact_pred = fact_prediction(df)
-        write_single(fact_pred, MART_PREDICTION)
-        logger.info(f"[marts] Wrote: {MART_PREDICTION}")
+        #print("[marts] Building fact_prediction …")
+        #fact_pred = fact_prediction(df)
+        #write_single(fact_pred, MART_PREDICTION)
+        #logger.info(f"[marts] Wrote: {MART_PREDICTION}")
 
         # AGG: min/max in last 5 years (for UI sliders, prediction bounds)
         #df5 = last_5_yrs_window(df)
