@@ -4,6 +4,7 @@ from app.streamlit.lib.io import load_fact_by_district, load_geojson
 from app.streamlit.lib.geo import detect_name_field, normalize_name, attach_values
 from app.streamlit.lib.colors import assign_colors_quantiled, color_scale_quantiles
 
+
 # Define page name and title
 st.title("Price Map")
 st.set_page_config(page_title="Price Map", layout="wide")
@@ -41,10 +42,35 @@ with st.sidebar:
     # Show year dropdown
     year_filter = st.selectbox("Year", years)
     
-    # Show property selector
-    ptype_label = st.radio("Property type", list(ptype_map.values()), horizontal=True)
-    # Convert back to internal code for filtering
-    property_filter = ptype_reverse[ptype_label]
+    # Show property type as buttons
+    if "ptype" not in st.session_state:
+        st.session_state.ptype = "All"
+    if "trigger_rerun" not in st.session_state:
+        st.session_state.trigger_rerun = False
+
+    def make_selector(code: str, label: str):
+        is_selected = (st.session_state.ptype == code)
+        if st.button(label, key=f"ptype_{code}", type=("primary" if is_selected else "secondary")):
+            st.session_state.ptype = code
+            st.session_state.trigger_rerun = True   # flag for rerun
+
+    options = [
+        ("All", "🔎 All"),
+        ("D",   "🏡 Detached"),
+        ("S",   "🏘️ Semi-Detached"),
+        ("T",   "🏚️ Terraced"),
+        ("F",   "🏢 Flat"),
+    ]
+
+    for code, label in options:
+        make_selector(code, label)
+
+    # Safe rerun outside callbacks → no warning
+    if st.session_state.trigger_rerun:
+        st.session_state.trigger_rerun = False
+        st.rerun()
+
+    property_filter = st.session_state.ptype
 
     # --- inside your existing "with st.sidebar:" block, after property_filter ---
     palette_choice = st.radio("Color scheme", ["Blue", "Green", "Red"], index=0, horizontal=True)
@@ -96,12 +122,6 @@ st.pydeck_chart(
     use_container_width=True,
     height=800
 )
-
-
-
-
-
-
 
 # Copyright info
 st.sidebar.markdown("---")
