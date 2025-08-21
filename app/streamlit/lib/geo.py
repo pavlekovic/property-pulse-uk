@@ -18,29 +18,26 @@ ALIASES: Dict[str, str] = {
     "CITY OF DERBY": "DERBY",
 }
 
-# Resolve multi-name
 def detect_name_field(geojson: dict, level: str = "Local Authorities") -> str:
-    """Return a column name with codes for different geo layers."""
+    """Pick a suitable name property from GeoJSON features."""
     
+    props0 = geojson["features"][0]["properties"]
     preferred = {
-        "Local Authorities": ["LAD25CD"],               # District level
-        "Counties":          ["CTYUA24NM"]            # County level
+        "Local Authorities": ["LAD25NM"],
+        "Counties":          ["CTYUA24NM"]
     }
-    
-    # Get possible field names for this level
-    candidates = preferred.get(level, [])
-    
-    # Return the first in the GeoJSON properties
-    for field in candidates:
-        if any(field in feature.get("properties", {}) for feature in geojson.get("features", [])):
-            return field
-        
+    for k in preferred.get(level, []):
+        if k in props0:
+            return k
+
+    return list(props0.keys())[0]
 
 # Normalize name and return (apply alias if possible)
 def normalize_name(x: str) -> str:
     """Upper + strip + alias replacement."""
     
     s = str(x).strip().upper()
+    
     return ALIASES.get(s, s)
 
 

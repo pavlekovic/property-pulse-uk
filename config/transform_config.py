@@ -6,6 +6,7 @@ DATA_DIR = BASE_DIR / "data"
 
 # Files directory
 RAW_DIR = DATA_DIR / "raw"
+MAPPING_DIR = DATA_DIR / "mapping"
 TRANS_DIR = DATA_DIR / "transformed"
 FULL_CSV = RAW_DIR / "pp_complete.csv"
 MONTHLY_FILENAME = "pp_monthly.csv"
@@ -18,3 +19,6 @@ MARTS_DIR = DATA_DIR / "marts"
 MART_FACT_BY_TYPE = MARTS_DIR / "fact_prices"             # partitioned by year
 MART_PREDICTION = MARTS_DIR / "fact_prediction"           # single file
 MART_BOUNDS_5Y = MARTS_DIR / "agg_bounds_5y"              # single file
+
+# Geojson data
+GEOJSON_PATH = MAPPING_DIR / "local_authority.geojson"
