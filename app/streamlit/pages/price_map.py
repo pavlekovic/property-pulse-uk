@@ -20,6 +20,20 @@ districts = sorted(df["district"].dropna().unique())
 # Define a list of property types
 types =  sorted(df["property_type"].dropna().unique())
 
+
+# Define mapping: internal code → user-friendly label
+ptype_map = {
+    "All": "All",
+    "D": "Detached",
+    "S": "Semi-Detached",
+    "T": "Terraced",
+    "F": "Flat"
+}
+
+# Reverse map (label → code)
+ptype_reverse = {v: k for k, v in ptype_map.items()}
+
+
 # Sidebar filters
 with st.sidebar:
     st.subheader("Filters")
@@ -28,7 +42,12 @@ with st.sidebar:
     year_filter = st.selectbox("Year", years)
     
     # Show property selector
-    property_filter = st.radio("Property type", types, horizontal=True)
+    ptype_label = st.radio("Property type", list(ptype_map.values()), horizontal=True)
+    # Convert back to internal code for filtering
+    property_filter = ptype_reverse[ptype_label]
+
+    # --- inside your existing "with st.sidebar:" block, after property_filter ---
+    palette_choice = st.radio("Color scheme", ["Blue", "Green", "Red"], index=0, horizontal=True)
 
 # Filter data for year and property type
 if property_filter != "All":
@@ -48,7 +67,7 @@ name_field = detect_name_field(geojson, level="Local Authorities")  # Local Auth
 matched_values = attach_values(geojson, lookup, name_field, value_field="avg_price")
 
 # Build quantile scale
-edges, colors = color_scale_quantiles(matched_values, n_bins=6)
+edges, colors = color_scale_quantiles(matched_values, n_bins=6, rgb_col=palette_choice.lower())
 
 # Assign colors to features
 assign_colors_quantiled(geojson, value_field="avg_price", edges=edges, colors=colors)
@@ -77,6 +96,12 @@ st.pydeck_chart(
     use_container_width=True,
     height=800
 )
+
+
+
+
+
+
 
 # Copyright info
 st.sidebar.markdown("---")
