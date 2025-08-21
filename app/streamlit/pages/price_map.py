@@ -18,7 +18,7 @@ years = sorted(df["year"].dropna().unique().tolist(), reverse=True)
 districts = sorted(df["district"].dropna().unique())
 
 # Define a list of property types
-types =  sorted(df["property_type"].dropna().unique()) + ["All"]
+types =  sorted(df["property_type"].dropna().unique())
 
 # Sidebar filters
 with st.sidebar:
@@ -73,7 +73,21 @@ tooltip = {"html": "<b>{__display_name}</b><br/>Avg price: £{avg_price}",
            "style": {"backgroundColor": "rgba(30,30,30,0.85)", "color": "white"}}
 
 st.pydeck_chart(
-    pdk.Deck(layers=[layer], initial_view_state=view_state, tooltip=tooltip, map_style=None),
+    pdk.Deck(layers=[layer], initial_view_state=view_state, tooltip=tooltip, map_style="light-v9"),
     use_container_width=True,
     height=800
+)
+
+# Copyright info
+st.sidebar.markdown("---")
+st.sidebar.markdown(
+    """
+    <small>
+    Contains HM Land Registry data © Crown copyright and database right 2021.  
+    Licensed under 
+    <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" target="_blank">
+    OGL v3.0</a>.
+    </small>
+    """,
+    unsafe_allow_html=True
 )
