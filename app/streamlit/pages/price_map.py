@@ -95,11 +95,14 @@ print(sub)
 sub_nonnull = sub.dropna(subset=["avg_price", "__norm"]).copy()
 lookup = dict(zip(sub_nonnull["__norm"], sub_nonnull["avg_price"].round(0)))
 
-print(f"lookup: {lookup}")
+#print(f"lookup: {lookup}")
 
 # Load geo data
 geojson = load_geojson()
 name_field = detect_name_field(geojson, level="Local Authorities")  # Local Authorities, can be changed to postal code
+
+
+print(name_field)
 
 # Match values from sub (price data) to geojson
 matched_values = attach_values(geojson, lookup, name_field, value_field="avg_price")
