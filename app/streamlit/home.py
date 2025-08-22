@@ -1,5 +1,6 @@
 import streamlit as st
 from config.streamlit_config import GIF_PATH
+from pathlib import Path
 
 # Page configuration
 st.set_page_config(page_title="PropertyPulse UK", layout="wide")
@@ -42,9 +43,13 @@ st.markdown(
 # =========================================================
 # ROW 1: hero (gif left)  |  intro (right)
 # =========================================================
+
 c1, c2 = st.columns([6, 6], gap="large")
 
 st.markdown("")  # spacer
+
+# Deployment bug - have to use path
+GIF_PATH   = Path("app/streamlit/assets/map.gif")
 
 with c1:
     if GIF_PATH.exists():
