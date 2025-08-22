@@ -12,9 +12,9 @@ def read_input(limit: int | None = None, engine: Engine = "pandas", spark=None) 
     """
     Read Parquet as pandas or Spark DataFrame.
 
-    - engine="pandas": returns pandas.DataFrame
-    - engine="spark":  returns pyspark.sql.DataFrame (requires `spark` session)
-    - limit: if provided, apply head(limit) in pandas, .limit(limit) in Spark
+    -> engine="pandas": returns pandas.DataFrame
+    -> engine="spark":  returns pyspark.sql.DataFrame (requires `spark` session)
+    -> limit: if provided, apply head(limit) in pandas, .limit(limit) in Spark
     """
     
     if not PARQUET_DIR.exists():
