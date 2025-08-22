@@ -77,13 +77,21 @@ with st.sidebar:
 
 # Filter data for year and property type
 if property_filter != "All":
-    sub = df[(df["year"] == year_filter) & (df["property_type"] == property_filter)]
+    sub = df[(df["year"] == year_filter) & (df["property_type"] == property_filter)].copy()
 else:
-    sub = df[df["year"] == year_filter]
+    sub = df[df["year"] == year_filter].copy()
 
-# Build lookup: district (normalized)
-sub["__norm"] = sub["district"].map(normalize_name)
-lookup = dict(zip(sub["__norm"], round(sub["avg_price"],0)))
+# Guard: if no rows after filtering, stop early
+if sub.empty:
+    st.warning("No data for the selected year/property type.")
+    st.stop()
+
+# Normalise district names (no SettingWithCopyWarning)
+sub.loc[:, "__norm"] = sub["district"].map(normalize_name)
+
+# Build lookup (round safely, drop NaNs)
+sub_nonnull = sub.dropna(subset=["avg_price", "__norm"]).copy()
+lookup = dict(zip(sub_nonnull["__norm"], sub_nonnull["avg_price"].round(0)))
 
 # Load geo data
 geojson = load_geojson()
