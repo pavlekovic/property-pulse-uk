@@ -73,9 +73,7 @@ with st.sidebar:
     property_filter = st.session_state.ptype
 
     # Choice of colors
-    palette_choice = st.radio("Color scheme", ["Blue", "Green", "Red"], index=0, horizontal=True)
-    # Normalise to a safe string (lower)
-    scheme = (palette_choice or "Blue").strip().lower()
+    #palette_choice = st.radio("Color scheme", ["Blue", "Green", "Red"], index=0, horizontal=True)
 
 # Filter data for year and property type
 if property_filter != "All":
@@ -94,13 +92,8 @@ name_field = detect_name_field(geojson, level="Local Authorities")  # Local Auth
 # Match values from sub (price data) to geojson
 matched_values = attach_values(geojson, lookup, name_field, value_field="avg_price")
 
-# Build quantile scale — support both function signatures:
-try:
-    # Newer signature that supports the keyword
-    edges, colors = color_scale_quantiles(matched_values, n_bins=6, rgb_col=scheme)
-except TypeError:
-    # Back-compat: older signature (values, n_bins, scheme)
-    edges, colors = color_scale_quantiles(matched_values, 6, scheme)
+# Build quantile scale
+edges, colors = color_scale_quantiles(matched_values, n_bins=6)
 
 # Assign colors to features
 assign_colors_quantiled(geojson, value_field="avg_price", edges=edges, colors=colors)
