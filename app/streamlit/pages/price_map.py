@@ -89,7 +89,7 @@ if sub.empty:
 # Normalise district names (no SettingWithCopyWarning)
 sub.loc[:, "__norm"] = sub["district"].map(normalize_name)
 
-#print(sub)
+print(sub)
 
 # Build lookup (round safely, drop NaNs)
 sub_nonnull = sub.dropna(subset=["avg_price", "__norm"]).copy()
