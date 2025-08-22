@@ -89,7 +89,7 @@ if sub.empty:
 # Normalise district names (no SettingWithCopyWarning)
 sub.loc[:, "__norm"] = sub["district"].map(normalize_name)
 
-print(sub)
+#print(sub)
 
 # Build lookup (round safely, drop NaNs)
 sub_nonnull = sub.dropna(subset=["avg_price", "__norm"]).copy()
@@ -101,11 +101,12 @@ lookup = dict(zip(sub_nonnull["__norm"], sub_nonnull["avg_price"].round(0)))
 geojson = load_geojson()
 name_field = detect_name_field(geojson, level="Local Authorities")  # Local Authorities, can be changed to postal code
 
-
 print(name_field)
 
 # Match values from sub (price data) to geojson
 matched_values = attach_values(geojson, lookup, name_field, value_field="avg_price")
+
+print(matched_values)
 
 # Build quantile scale
 edges, colors = color_scale_quantiles(matched_values, n_bins=6)
