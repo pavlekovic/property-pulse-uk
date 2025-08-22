@@ -1,13 +1,10 @@
 import streamlit as st
-from pathlib import Path
+from config.streamlit_config import GIF_PATH
 
+# Page configuration
 st.set_page_config(page_title="PropertyPulse UK", layout="wide")
 
-# --- paths (adjust if needed) ---
-ASSETS_DIR = Path("app/streamlit/assets")
-GIF_PATH   = ASSETS_DIR / "map.gif"   # put your GIF here
-
-# ---------- global CSS (cards, layout, buttons) ----------
+# Global global CSS
 st.markdown(
     """
     <style>
@@ -42,8 +39,6 @@ st.markdown(
 )
 
 
-
-
 # =========================================================
 # ROW 1: hero (gif left)  |  intro (right)
 # =========================================================
@@ -55,7 +50,7 @@ with c1:
     if GIF_PATH.exists():
         st.image(str(GIF_PATH), width=700)
     else:
-        st.info("Add your GIF at: `app/streamlit/assets/hero.gif`")
+        st.info(f"No GIF at: {GIF_PATH}")
 
 with c2:
     st.markdown(
@@ -82,7 +77,6 @@ with c2:
         unsafe_allow_html=True,
     )
 
-#st.markdown("")  # spacer
 
 # =========================================================
 # ROW 2: Price Map (left) | Price Tracker (right)

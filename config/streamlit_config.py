@@ -17,3 +17,8 @@ GEOJSON_PATH = MAPPING_DIR / "local_authority.geojson"
 
 # Model path
 MODEL_PATH = BASE_DIR / "models" / "xgb_price.pkl"
+
+# Misc
+STREAMLIT_DIR = BASE_DIR / "app" / "streamlit"
+ASSETS_DIR = STREAMLIT_DIR / "assets"
+GIF_PATH   = ASSETS_DIR / "map.gif"
