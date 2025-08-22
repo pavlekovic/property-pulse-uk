@@ -23,9 +23,16 @@ def detect_name_field(geojson: dict, level: str = "Local Authorities") -> str:
     
     props0 = geojson["features"][0]["properties"]
     preferred = {
-        "Local Authorities": ["LAD25NM"],
+        "Local Authorities": ["LAD25NM", "LAD24NM", "LAD23NM", "LAD22NM","LTLA23NM", "LTLA22NM",
+            "NAME", "Name", "lad_name", "name"],
         "Counties":          ["CTYUA24NM"]
     }
+    
+    # Try all known candidates for the requested level
+    for k in preferred.get(level, []):
+        if k in props0:
+            return k
+    
     for k in preferred.get(level, []):
         if k in props0:
             return k
