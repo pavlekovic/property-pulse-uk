@@ -99,6 +99,8 @@ print(f"second: {lookup}")
 
 # Load geo data
 geojson = load_geojson()
+print(f"geojson: \n {geojson}")
+
 name_field = detect_name_field(geojson, level="Local Authorities")  # Local Authorities, can be changed to postal code
 
 print(f"third: {name_field}")
