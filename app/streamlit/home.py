@@ -1,5 +1,5 @@
 import streamlit as st
-from config.streamlit_config import GIF_PATH
+#from config.streamlit_config import GIF_PATH
 from pathlib import Path
 
 # Page configuration
