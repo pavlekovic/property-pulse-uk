@@ -139,6 +139,18 @@ st.pydeck_chart(
     height=800
 )
 
+
+with st.expander("🔧 Debug (temporary)"):
+    st.write("name_field chosen:", name_field)
+    st.write("Sample GeoJSON names:", [f["properties"].get(name_field) for f in geojson["features"][:5]])
+    st.write("Num price rows after filters:", len(sub))
+    st.write("Num lookup keys:", len(lookup))
+    st.write("First 10 lookup keys:", list(lookup.keys())[:10])
+
+
+
+
+
 # Copyright info
 st.sidebar.markdown("---")
 st.sidebar.markdown(
