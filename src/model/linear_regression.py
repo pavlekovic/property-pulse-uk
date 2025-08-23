@@ -3,14 +3,14 @@ import numpy as np
 import pandas as pd
 import joblib
 from pathlib import Path
+from config.streamlit_config import MART_PREDICTION, ARTIFACT_PATH
 
-# Paths
-PRED_BASE_PATH = Path("data/marts/fact_prediction")  # parquet with: price, year, district, property_type, new_build, tenure
-ARTIFACT_PATH  = Path("models/lintrend_params.pkl")
+# Makre sure the dir exists
 ARTIFACT_PATH.parent.mkdir(parents=True, exist_ok=True)
 
 def fit_log_trend(y: pd.Series, x: pd.Series):
     """Fit log(price)=a+b*year; return (a, b, rmse_log) or None if <3 pts."""
+    
     x = x.astype(int).to_numpy()
     y = np.log(y.astype(float).to_numpy())
     if len(x) < 3:
@@ -21,7 +21,7 @@ def fit_log_trend(y: pd.Series, x: pd.Series):
     return float(a), float(b), rmse
 
 def main():
-    df = pd.read_parquet(PRED_BASE_PATH)
+    df = pd.read_parquet(MART_PREDICTION)
     df = df.loc[:, ["price", "year", "district", "property_type", "new_build", "tenure"]].dropna()
     df["year"]  = df["year"].astype(int)
     df["price"] = df["price"].astype(float)
