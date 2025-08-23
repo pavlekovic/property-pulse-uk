@@ -134,7 +134,7 @@ tooltip = {"html": "<b>{__display_name}</b><br/>Avg price: £{avg_price}",
            "style": {"backgroundColor": "rgba(30,30,30,0.85)", "color": "white"}}
 
 st.pydeck_chart(
-    pdk.Deck(layers=[layer], initial_view_state=view_state, tooltip=tooltip, map_style="light-v9"),
+    pdk.Deck(layers=[layer], initial_view_state=view_state, tooltip=tooltip),
     use_container_width=True,
     height=800
 )
