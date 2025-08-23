@@ -145,7 +145,8 @@ with st.expander("🔧 Debug (temporary)"):
     st.write("First 10 lookup keys:", list(lookup.keys())[:10])
     st.write("Geojson:",list(props0.keys()))
 
-
+all_codes = sorted({f["properties"]["LAD25CD"] for f in geojson["features"]})
+st.write("All LAD25CD codes:", all_codes)
 
 
 # Copyright info
