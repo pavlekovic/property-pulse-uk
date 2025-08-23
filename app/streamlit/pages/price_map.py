@@ -133,45 +133,11 @@ layer = pdk.Layer(
 tooltip = {"html": "<b>{__display_name}</b><br/>Avg price: £{avg_price}",
            "style": {"backgroundColor": "rgba(30,30,30,0.85)", "color": "white"}}
 
-
-labels = [
-    {
-        "lon": f["properties"]["LONG"],
-        "lat": f["properties"]["LAT"],
-        "name": f["properties"].get("__display_name") or f["properties"].get(name_field)
-    }
-    for f in geojson["features"]
-    if f["properties"].get("LONG") is not None and f["properties"].get("LAT") is not None
-]
-
-text_layer = pdk.Layer(
-    "TextLayer",
-    labels,
-    get_position='[lon, lat]',
-    get_text='name',
-    get_size=12,                 # tweak size as you like
-    get_color=[20, 20, 20, 220], # dark gray
-    get_angle=0,
-    get_text_anchor='"middle"',
-    get_alignment_baseline='"center"',
-    billboard=True,              # keep labels facing the screen
-    pickable=False,
-)
-
-
-
 st.pydeck_chart(
-    pdk.Deck(
-        layers=[layer, text_layer],    # <— add the labels on top
-        initial_view_state=view_state,
-        tooltip=tooltip,
-        map_style="light-v9",
-    ),
+    pdk.Deck(layers=[layer], initial_view_state=view_state, tooltip=tooltip, map_style="light-v9"),
     use_container_width=True,
-    height=800,
+    height=800
 )
-
-
 
 
 # Copyright info
