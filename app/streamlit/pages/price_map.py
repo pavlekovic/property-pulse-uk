@@ -134,6 +134,8 @@ st.pydeck_chart(
     height=800
 )
 
+props0 = geojson["features"][0]["properties"]
+#print("Available keys in feature:", list(props0.keys()))
 
 with st.expander("🔧 Debug (temporary)"):
     st.write("name_field chosen:", name_field)
@@ -141,7 +143,7 @@ with st.expander("🔧 Debug (temporary)"):
     st.write("Num price rows after filters:", len(sub))
     st.write("Num lookup keys:", len(lookup))
     st.write("First 10 lookup keys:", list(lookup.keys())[:10])
-    st.write("Geojson:",geojson)
+    st.write("Geojson:",list(props0.keys()))
 
 
 
