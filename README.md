@@ -350,7 +350,7 @@ kanban
         Task 2.7: Test: Edge cases - empty selection, single district.
 		Task 2.8: Test: Correctness when years are missing for some districts.
     
-    (E4 Story 3: As a Property Pulse UK user, I want a 5-year price forecast (with uncertainty) for a specific district, property type, new build, and tenure, anchored to my asking price.)
+    (E4 Story 3: As a Property Pulse UK user, I want a 5-year price forecast, with uncertainty, for a specific district, property type, new build, and tenure, anchored to my asking price.)
         Task 3.5: Test: Segment with data; segment without data; extreme asking prices.
 
     (E4 Story 4: As a Property Pulse UK user,  I want to simulate a one-off downturn in the future  to see impact on the 5-year path.)
