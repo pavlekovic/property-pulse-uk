@@ -362,14 +362,14 @@ kanban
         Task 1.1: Ensure fact_by_district mart includes district, year, property_type, avg_price.
         Task 1.2: Build Streamlit page with PyDeck GeoJsonLayer; tooltips; initial view state.
         Task 1.3: Implement detect_name_field and normalize_name; join mart → GeoJSON.
-        Task 1.4: Cache mart and GeoJSON - st.cache_data/st.cache_resource.
+        Task 1.4: Cache mart and GeoJSON - st.cache_data / st.cache_resource.
         Task 1.5: Year selectbox, custom property type control, icons → values D/S/T/F/All.
         Task 1.6: Verify mart has rows for all combinations; handle empty results.
         Task 2.1: Ensure mart has district, year, avg_price; drop property_type='O' rows.
         Task 2.2: Altair line chart; nearest point interaction; tooltip.
         Task 2.3: Year range slider; district multiselect - no default.
         Task 2.4: Cache the dataframe; pre-coerce numeric dtypes.
-        Task 3.1: Read parquet once; fit log-linear trend per segment; store params like a,b,rmse,last_year,mu_last in models/lintrend_params.pkl.
+        Task 3.1: Read parquet once; fit log-linear trend per segment; store params like a, b, rmse,last_year, mu_last in models / lintrend_params.pkl.
         Task 3.2: Save category vocab to drive UI dropdowns.
         Task 3.3: Load pickle; compute absolute forecast; anchor to asking price using ratios vs mu_last.
         Task 3.4: Chart with band; details table; comparison vs current average via load_fact_by_district.
