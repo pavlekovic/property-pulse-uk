@@ -4,16 +4,12 @@ import pandas as pd
 import altair as alt
 import streamlit as st
 import joblib
-from pathlib import Path
 import datetime
-#from config.streamlit_config import ARTIFACT_PATH
 from app.streamlit.lib.io import load_fact_by_district
 
-
-from config.streamlit_config import ARTIFACT_PATH
-
-# Makre sure the dir exists
-ARTIFACT_PATH.parent.mkdir(parents=True, exist_ok=True)
+#from config.streamlit_config import ARTIFACT_PATH
+# Make sure the dir exists
+#ARTIFACT_PATH.parent.mkdir(parents=True, exist_ok=True)
 
 
 st.set_page_config(page_title="Price Prediction", layout="wide")
@@ -22,8 +18,8 @@ st.title("Price Prediction")
 # ---------- Load small artifact (no Parquet at runtime) ----------
 @st.cache_resource
 def load_artifact():
-    #return joblib.load("models/lintrend_params.pkl")
-    return joblib.load(ARTIFACT_PATH)
+    return joblib.load("models/lintrend_params.pkl")
+    #return joblib.load(ARTIFACT_PATH)
 
 def forecast_from_params(a: float, b: float, s_log: float, last_year: int, years_ahead: int = 5) -> pd.DataFrame:
     """Absolute forecast path in price space, with simple 95% band."""
