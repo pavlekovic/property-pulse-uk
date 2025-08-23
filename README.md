@@ -33,7 +33,7 @@ The final processed dataset will form the backbone of the Property Pulse UK app,
 │   └── utils                      # General helper functions (logging, validation, file handling)
 │
 └── data
-│   ├── mapping                    # Mapping tables (e.g., GeoJSON keys, property type codes)
+│   ├── mapping                    # Mapping tables (e.g., GeoJSON keys)
 │   ├── marts                      # Analytical data marts
 │   │   ├── fact_prices            # Fact table of property price transactions for analysis
 │   │   └── fact_prediction        # Fact table of property price transactions for prediction
@@ -45,7 +45,7 @@ The final processed dataset will form the backbone of the Property Pulse UK app,
 │
 └── logs                           # Log files from ETL jobs and ML models
 │
-└── models                         # Saved ML models (Joblib files, trained artifacts)
+└── models                         # Saved ML models (Pickle file)
 │
 └── scripts                        # Automation script (run pipeline)
 │
@@ -261,7 +261,6 @@ kanban
      
 ```
 
-
 ### EPIC 2 User stories and tasks
 
 ```mermaid
@@ -325,5 +324,55 @@ kanban
         Task 2.1: Read TARGET_DB_* pieces from .env and compose URL with util function
         Task 2.2: Provide get_target to read TARGET_DB_SCHEMA and TARGET_DB_TABLE
         Task 2.3: Ensure .env is git-ignored
+        
+```
+
+### EPIC 4 User stories and tasks
+
+```mermaid
+kanban
+    Epics
+        (Epic 1: As a Data Analyst/Scientist, I want to have a robust extraction process that can download, track, and store UK property price data and supporting geospatial data, so that the ETL pipeline can reliably maintain both full historical records and monthly updates ready for transformation, analysis, and visualisation.)
+
+        (Epic 2: As a Data Analyst/Scientist, I want to have raw property price datasets transformed and standardised the so that they are clean, consistent, and geospatially compatible with the GeoJSON location data, so that the data can be reliably joined, visualised, and analysed within the Streamlit application and future machine learning models.)
+
+        (Epic 3: As a Data Analyst/Scientist, I want the extracted and transformed property price data to be loaded into a single, well-structured SQL table, so that I can efficiently query, analyse, and generate insights on UK property prices.)
+
+        (Epic 4: As a Property Pulse UK user, I want to access the extracted and transformed property price data through an intuitive, interactive interface, so that I can easily search, explore, and visualise property price trends across the UK.)
+
+    (E4 Story 1: As a Property Pulse UK user, I want to view average property prices by local authority on a map and filter those prices by year and property type so I can quickly compare areas.)
+		Task 1.7: Test: Unit test join logic (names vs codes); visual smoke test.
+		Task 1.8: Test: Filter combos; empty state.
+
+    (E4 Story 2: As a Property Pulse UK user, I want to select multiple districts and see price trends over time as well as % change between the first and last year in range for each district, so I can compare areas.)
+        Task 2.5: Compute start/end per district - no extra aggregation if mart is yearly.
+		Task 2.6: Display as compact cards or table; sort by % change.
+        Task 2.7: Test: Edge cases (empty selection, single district).
+		Task 2.8: Test: Correctness when years are missing for some districts.
+    
+    (E4 Story 3: As a Property Pulse UK user, I want a 5-year price forecast (with uncertainty) for a specific district, property type, new build, and tenure, anchored to my asking price.)
+        Task 3.6: Test: Segment with data; segment without data; extreme asking prices.
+
+    (E4 Story 4: As a Property Pulse UK user,  I want to simulate a one-off downturn in the future  to see impact on the 5-year path.)
+        Task 4.1: Implement shock by selecting in which of the next 5 years it happens and update chart/table.
+        Task 4.2: Implement shock by selecting a downturn in percentages on a slider and multiply subsequent ratios; update chart/table.
+        Task 4.3: Test: Shock off vs on; different years and different percentages.
+    
+    Done
+        Task 1.1: Ensure fact_by_district mart includes district, year, property_type, avg_price.
+        Task 1.2: Build Streamlit page with PyDeck GeoJsonLayer; tooltips; initial view state.
+		Task 1.3: Implement detect_name_field and normalize_name; join mart → GeoJSON.
+		Task 1.4: Cache mart and GeoJSON - @st.cache_data/@st.cache_resource.
+        Task 1.5: Year selectbox, custom property type control (icons → values D/S/T/F/All).
+		Task 1.6: Verify mart has rows for all combinations; handle empty results.
+        Task 2.1: Ensure mart has district, year, avg_price; drop property_type='O' rows.
+		Task 2.2: Altair line chart; nearest point interaction; tooltip.
+		Task 2.3: Year range slider; district multiselect - no default.
+		Task 2.4: Cache the dataframe; pre-coerce numeric dtypes.
+        Task 3.1: Offline prep script (scripts/train_lin_trend.py):
+        Task 3.2: Read parquet once; fit log-linear trend per segment; store params {a,b,rmse,last_year,mu_last} in models/lintrend_params.pkl.
+        Task 3.3: Save category vocab to drive UI dropdowns.
+        Task 3.4: Load pickle (no parquet); compute absolute forecast; anchor to asking price using ratios vs mu_last.
+        Task 3.5: Chart with band; details table; comparison vs current average via load_fact_by_district().
         
 ```
