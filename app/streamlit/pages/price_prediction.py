@@ -15,23 +15,25 @@ from app.streamlit.lib.io import load_fact_by_district
 st.set_page_config(page_title="Price Prediction", layout="wide")
 st.title("Price Prediction")
 
-# ---------- Load small artifact (no Parquet at runtime) ----------
+# ---------- Load artifact ----------
 @st.cache_resource
 def load_artifact():
     return joblib.load("models/lintrend_params.pkl")
-    #return joblib.load(ARTIFACT_PATH)
 
 def forecast_from_params(a: float, b: float, s_log: float, last_year: int, years_ahead: int = 5) -> pd.DataFrame:
     """Absolute forecast path in price space, with simple 95% band."""
+    
     years = np.arange(last_year + 1, last_year + 1 + years_ahead, dtype=int)
     y_log = a + b * years
     mu    = np.exp(y_log)
     lo    = np.exp(y_log - 1.96 * s_log)
     hi    = np.exp(y_log + 1.96 * s_log)
+    
     return pd.DataFrame({"year": years, "mu": mu, "lower": lo, "upper": hi})
 
 def anchor_to_asking(pred_df: pd.DataFrame, mu_last: float, asking_price: float) -> pd.DataFrame:
     """Scale model’s absolute path to start from asking_price (keeps shape)."""
+    
     ratio   = pred_df["mu"]    / mu_last
     ratio_l = pred_df["lower"] / mu_last
     ratio_u = pred_df["upper"] / mu_last
@@ -39,6 +41,7 @@ def anchor_to_asking(pred_df: pd.DataFrame, mu_last: float, asking_price: float)
     out["pred_price"] = asking_price * ratio
     out["lower_95"]   = asking_price * ratio_l
     out["upper_95"]   = asking_price * ratio_u
+    
     return out[["year", "pred_price", "lower_95", "upper_95"]]
 
 art = load_artifact()
@@ -46,7 +49,7 @@ params = art["params"]
 cats   = art["cat_categories"]
 year_max = int(art["year_max"])
 
-# ---------- Inputs ----------
+# ---------- Take parameters from user ----------
 c1, c2, c3, c4, c5 = st.columns(5)
 with c1:
     district = st.selectbox("District", options=["Select a district"] + cats["district"], index=0)
@@ -77,7 +80,7 @@ if district is None or asking_price is None:
 # ---------- Forecast ----------
 key = (district, ptype, new_build, tenure)
 if key not in params:
-    st.warning("No history for this combination. Try another selection.")
+    st.warning("No history for this combination. Try another selection / combination.")
     st.stop()
 
 p = params[key]

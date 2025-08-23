@@ -4,7 +4,7 @@ import pandas as pd
 import joblib
 from config.streamlit_config import MART_PREDICTION, ARTIFACT_PATH
 
-# Makre sure the dir exists
+# Make sure the dir exists
 ARTIFACT_PATH.parent.mkdir(parents=True, exist_ok=True)
 
 def fit_log_trend(y: pd.Series, x: pd.Series):
