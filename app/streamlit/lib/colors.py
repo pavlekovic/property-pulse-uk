@@ -31,8 +31,8 @@ def color_scale_quantiles(values, n_bins: int = 6, rgb_col: str = "red"):
     else:
         # Fallback to blue if unknown value passed
         palette = [
-            (239, 243, 255), (198, 219, 239), (158, 202, 225),
-            (107, 174, 214), (49, 130, 189), (8, 81, 156)
+            (255, 245, 240), (254, 187, 161), (252, 146, 114),
+            (251, 106, 74), (222, 45, 38), (165, 15, 21)
         ]
         
     colors = [(r, g, b, 190) for (r, g, b) in palette]

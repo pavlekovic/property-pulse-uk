@@ -113,7 +113,7 @@ with c3:
           <p>
             View average sale prices by local authority. Pick a year, choose a property type, and explore the map.
           </p>
-          <a href="https://property-pulse-uk.streamlit.app/price_map" class="link-btn">Go to Price Map</a>
+          <a href="https://property-pulse-uk.streamlit.app/price_map" target="_self" class="link-btn">Go to Price Map</a>
         </div>
         """,
         unsafe_allow_html=True,
@@ -144,7 +144,7 @@ with c4:
           <p>
             Compare price trends over time. Select up to 10 districts, adjust the year range, and see the lines update.
           </p>
-          <a href="https://property-pulse-uk.streamlit.app/price_tracker" class="link-btn">Go to Price Tracker</a>
+          <a href="https://property-pulse-uk.streamlit.app/price_tracker" target="_self" class="link-btn">Go to Price Tracker</a>
         </div>
         """,
         unsafe_allow_html=True,
@@ -181,7 +181,7 @@ with c5:
           <p>
             Enter a district, property type, and details to see a 5-year price forecast with a simple uncertainty band.
           </p>
-          <a href="https://property-pulse-uk.streamlit.app/price_prediction" class="link-btn">Go to Price Prediction</a>
+          <a href="https://property-pulse-uk.streamlit.app/price_prediction" target="_self" class="link-btn">Go to Price Prediction</a>
         </div>
         """,
         unsafe_allow_html=True,
