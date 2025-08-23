@@ -103,7 +103,7 @@ print(f"geojson: \n {geojson}")
 
 name_field = detect_name_field(geojson, level="Local Authorities")  # Local Authorities, can be changed to postal code
 
-print(f"third: {name_field}")
+name_field = "LAD25NM"
 
 # Match values from sub (price data) to geojson
 matched_values = attach_values(geojson, lookup, name_field, value_field="avg_price")
