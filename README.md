@@ -341,22 +341,22 @@ kanban
         (Epic 4: As a Property Pulse UK user, I want to access the extracted and transformed property price data through an intuitive, interactive interface, so that I can easily search, explore, and visualise property price trends across the UK.)
 
     (E4 Story 1: As a Property Pulse UK user, I want to view average property prices by local authority on a map and filter those prices by year and property type so I can quickly compare areas.)
-		Task 1.7: Test: Unit test join logic - names vs codes; visual smoke test.
-		Task 1.8: Test: Filter combos; empty state.
+		Task 1.7: Test - Unit test join logic - names vs codes; visual smoke test.
+		Task 1.8: Test - Filter combos; empty state.
 
     (E4 Story 2: As a Property Pulse UK user, I want to select multiple districts and see price trends over time as well as % change between the first and last year in range for each district, so I can compare areas.)
         Task 2.5: Compute start/end per district - no extra aggregation if mart is yearly.
 		Task 2.6: Display as compact cards or table; sort by % change.
-        Task 2.7: Test: Edge cases - empty selection, single district.
-		Task 2.8: Test: Correctness when years are missing for some districts.
+        Task 2.7: Test - Edge cases - empty selection, single district.
+		Task 2.8: Test - Correctness when years are missing for some districts.
     
     (E4 Story 3: As a Property Pulse UK user, I want a 5-year price forecast, with uncertainty, for a specific district, property type, new build, and tenure, anchored to my asking price.)
-        Task 3.5: Test: Segment with data; segment without data; extreme asking prices.
+        Task 3.5: Test - Segment with data; segment without data; extreme asking prices.
 
     (E4 Story 4: As a Property Pulse UK user,  I want to simulate a one-off downturn in the future  to see impact on the 5-year path.)
         Task 4.1: Implement shock by selecting in which of the next 5 years it happens and update chart/table.
         Task 4.2: Implement shock by selecting a downturn in percentages on a slider and multiply subsequent ratios; update chart/table.
-        Task 4.3: Test: Shock off vs on; different years and different percentages.
+        Task 4.3: Test - Shock off vs on; different years and different percentages.
     
     Done
         Task 1.1: Ensure fact_by_district mart includes district, year, property_type, avg_price.
