@@ -17,6 +17,8 @@ GEOJSON_PATH = MAPPING_DIR / "local_authority.geojson"
 
 # Model path
 MODEL_PATH = BASE_DIR / "models" / "xgb_price.pkl"
+ARTIFACT_PATH = BASE_DIR / "models" / "lintrend_params.pkl"
+PRED_BASE_PATH = Path("data/marts/fact_prediction")
 
 # Misc
 STREAMLIT_DIR = BASE_DIR / "app" / "streamlit"
