@@ -96,6 +96,11 @@ lookup = dict(zip(sub_nonnull["__norm"], sub_nonnull["avg_price"].round(0)))
 # Load geo data
 geojson = load_geojson()
 
+geojson["features"] = [
+    f for f in geojson["features"]
+    if f["properties"]["LAD25CD"].startswith(("E", "W"))
+]
+
 #name_field = detect_name_field(geojson, level="Local Authorities")  # Local Authorities, can be changed to postal code
 # For online
 name_field = "LAD25NM"
@@ -134,19 +139,7 @@ st.pydeck_chart(
     height=800
 )
 
-props0 = geojson["features"][0]["properties"]
-#print("Available keys in feature:", list(props0.keys()))
 
-with st.expander("🔧 Debug (temporary)"):
-    st.write("name_field chosen:", name_field)
-    st.write("Sample GeoJSON names:", [f["properties"].get(name_field) for f in geojson["features"][:5]])
-    st.write("Num price rows after filters:", len(sub))
-    st.write("Num lookup keys:", len(lookup))
-    st.write("First 10 lookup keys:", list(lookup.keys())[:10])
-    st.write("Geojson:",list(props0.keys()))
-
-all_codes = sorted({f["properties"]["LAD25CD"] for f in geojson["features"]})
-st.write("All LAD25CD codes:", all_codes)
 
 
 # Copyright info
