@@ -341,8 +341,7 @@ kanban
         (Epic 4: As a Property Pulse UK user, I want to access the extracted and transformed property price data through an intuitive, interactive interface, so that I can easily search, explore, and visualise property price trends across the UK.)
 
     (E4 Story 1: As a Property Pulse UK user, I want to view average property prices by local authority on a map and filter those prices by year and property type so I can quickly compare areas.)
-		Task 1.7: Test - Unit test join logic - names vs codes; visual smoke test.
-		Task 1.8: Test - Filter combos; empty state.
+
 
     (E4 Story 2: As a Property Pulse UK user, I want to select multiple districts and see price trends over time as well as % change between the first and last year in range for each district, so I can compare areas.)
         Task 2.5: Compute start/end per district - no extra aggregation if mart is yearly.
