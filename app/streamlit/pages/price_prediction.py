@@ -6,12 +6,11 @@ import streamlit as st
 import joblib
 from pathlib import Path
 import datetime
+from config.streamlit_config import ARTIFACT_PATH
 from app.streamlit.lib.io import load_fact_by_district  # your existing helper for current-avg lookup
 
 st.set_page_config(page_title="Price Prediction", layout="wide")
 st.title("Price Prediction")
-
-ARTIFACT_PATH = Path("models/lintrend_params.pkl")   # produced by scripts/train_lin_trend.py
 
 # ---------- Load small artifact (no Parquet at runtime) ----------
 @st.cache_resource
@@ -46,10 +45,10 @@ year_max = int(art["year_max"])
 # ---------- Inputs ----------
 c1, c2, c3, c4, c5 = st.columns(5)
 with c1:
-    district = st.selectbox("District", options=["— choose —"] + cats["district"], index=0)
-    district = None if district == "— choose —" else district
+    district = st.selectbox("District", options=["Select a district"] + cats["district"], index=0)
+    district = None if district == "Select a district" else district
 with c2:
-    asking_price = st.number_input("Asking price (£)", min_value=50_000, max_value=5_000_000, step=5_000, value=250_000)
+    asking_price = st.number_input("Current value (£)", min_value=50_000, max_value=5_000_000, step=5_000, value=None)
 with c3:
     # D/S/T/F radio with icons
     ptype_map = {"D": "Detached", "S": "Semi-Detached", "T": "Terraced", "F": "Flat"}
