@@ -1,6 +1,6 @@
 import numpy as np
 
-def color_scale_quantiles(values, n_bins: int = 6, rgb_col: str = "blue"):
+def color_scale_quantiles(values, n_bins: int = 6, rgb_col: str = "red"):
     """Compute quantile breakpoints and a simple light→dark blue palette."""
     # Keep only real numbers (drop None, NaN, ±inf)
     vals = [float(v) for v in values if v is not None and np.isfinite(v)]

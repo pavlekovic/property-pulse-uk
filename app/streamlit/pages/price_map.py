@@ -118,26 +118,51 @@ assign_colors_quantiled(geojson, value_field="avg_price", edges=edges, colors=co
 view_state = pdk.ViewState(latitude=53.0, longitude=-3.0, zoom=5.7, bearing=0, pitch=0)
 
 # Render geo layer
-layer = pdk.Layer(
+
+# View & tooltip
+view_state = pdk.ViewState(latitude=53.0, longitude=-3.0, zoom=5.7, bearing=0, pitch=0)
+tooltip = {
+    "html": "<b>{__display_name}</b><br/>Avg price: £{avg_price}",
+    "style": {"backgroundColor": "rgba(30,30,30,0.85)", "color": "white"}
+}
+
+# Base map (no labels) — nice neutral background
+basemap_layer = pdk.Layer(
+    "TileLayer",
+    data="https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png",
+    subdomains=["a", "b", "c"],
+    min_zoom=0,
+    max_zoom=20,
+    tile_size=256,
+    opacity=1.0,
+)
+
+# Your polygons
+geo_layer = pdk.Layer(
     "GeoJsonLayer",
-    geojson,
-    get_fill_color="properties.fill_rgba",
-    get_line_color=[80, 80, 80, 120],
+    data=geojson,  # existing GeoJSON dict
+    get_fill_color="properties.fill_rgba",  # e.g., [r,g,b,a]
+    get_line_color=[80, 80, 80, 140],
     line_width_min_pixels=0.5,
     pickable=True,
     stroked=True,
     filled=True,
     auto_highlight=True,
+    opacity=0.45
 )
-
-tooltip = {"html": "<b>{__display_name}</b><br/>Avg price: £{avg_price}",
-           "style": {"backgroundColor": "rgba(30,30,30,0.85)", "color": "white"}}
 
 st.pydeck_chart(
-    pdk.Deck(layers=[layer], initial_view_state=view_state, tooltip=tooltip, map_style="light-v9"),
+    pdk.Deck(
+        layers=[basemap_layer, geo_layer],
+        initial_view_state=view_state,
+        tooltip=tooltip,
+        map_style=None,
+    ),
     use_container_width=True,
-    height=800
+    height=800,
 )
+
+
 
 
 # Copyright info
