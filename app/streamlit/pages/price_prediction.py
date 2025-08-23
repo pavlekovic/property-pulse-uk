@@ -6,8 +6,8 @@ import streamlit as st
 import joblib
 from pathlib import Path
 import datetime
-from config.streamlit_config import ARTIFACT_PATH
-from app.streamlit.lib.io import load_fact_by_district  # your existing helper for current-avg lookup
+#from config.streamlit_config import ARTIFACT_PATH
+from app.streamlit.lib.io import load_fact_by_district
 
 st.set_page_config(page_title="Price Prediction", layout="wide")
 st.title("Price Prediction")
@@ -15,7 +15,7 @@ st.title("Price Prediction")
 # ---------- Load small artifact (no Parquet at runtime) ----------
 @st.cache_resource
 def load_artifact():
-    return joblib.load(ARTIFACT_PATH)
+    return joblib.load("models/lintrend_params.pkl")
 
 def forecast_from_params(a: float, b: float, s_log: float, last_year: int, years_ahead: int = 5) -> pd.DataFrame:
     """Absolute forecast path in price space, with simple 95% band."""

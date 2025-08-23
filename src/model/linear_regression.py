@@ -2,7 +2,6 @@
 import numpy as np
 import pandas as pd
 import joblib
-from pathlib import Path
 from config.streamlit_config import MART_PREDICTION, ARTIFACT_PATH
 
 # Makre sure the dir exists
