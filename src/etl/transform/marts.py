@@ -41,7 +41,7 @@ def fact_avg_yearly_ptype (df: DataFrame) -> DataFrame:
     fact = fact_ptype.unionByName(fact_all)
     return fact
 
-# Data mart for XGBoost model
+# Data mart for prediction model(s)
 def fact_prediction (df: DataFrame) -> DataFrame:
     """Filter raw transactions for prediction dataset, keep only 2010 onwards and required columns."""
 

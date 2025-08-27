@@ -1,6 +1,6 @@
 from pyspark.sql import DataFrame
 import geopandas as gpd
-from pyspark.sql.functions import col, to_timestamp, to_date, year, trim, upper, regexp_replace, coalesce, lit
+from pyspark.sql.functions import col, to_timestamp, to_date, year, trim, upper, regexp_replace, regexp_extract, coalesce, lit
 
 def standardize_data (df: DataFrame) -> DataFrame:
     """Standardize datetime and postcode"""
@@ -18,12 +18,24 @@ def standardize_data (df: DataFrame) -> DataFrame:
     
     # Normalize postcode: uppercase + strip all whitespace
     df = df.withColumn("postcode", upper(regexp_replace(col("postcode"), r"\s+", "")))
+    #df = df.withColumn("postcode", upper(col("postcode")))
+    
+    # Create a custom post code zone
+    
+    # Extract prefix (everything before numbers + numbers until space) and first suffix letter
+    # Regex: group 1 = outward code (prefix), group 2 = first suffix letter
+    df = df.withColumn(
+        "postcode_zone",
+        #regexp_extract(col("postcode"), r"^([A-Z0-9]+)([0-9][A-Z]?).*", 1)  # outward code
+        regexp_extract(col("postcode"), r"^([A-Z]+[0-9]+)", 1)
+    )
     
     # Exclude property_type == 'O'
     df = df.filter(upper(trim(col("property_type"))) != lit("O"))
     
     return df
-    
+
+
 def remove_bad_rows (df: DataFrame) -> DataFrame:
     """Remove rows where transfer_datetime or price are null"""
     df = (
@@ -33,6 +45,7 @@ def remove_bad_rows (df: DataFrame) -> DataFrame:
         .filter(col("price") > 0)                           # Keep rows where price is not 0
     )
     return df
+
 
 def drop_duplicates (df:DataFrame) -> DataFrame:
     """Remove duplicates by transaction_id (keeps first)"""
