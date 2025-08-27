@@ -16,8 +16,13 @@ RAW_DIR = BASE_DIR / "data" / "raw"
 
 # GEOJSON directory
 MAPPING_DIR = BASE_DIR / "data" / "mapping"
-GEOJSON_API_URL = "https://services1.arcgis.com/ESMARspQHYMw9BZ9/arcgis/rest/services/LAD_MAY_2025_UK_BGC_V2/FeatureServer/0/query"
+GEOJSON_API_URL = "https://services1.arcgis.com/ESMARspQHYMw9BZ9/arcgis/rest/services/LAD_MAY_2025_UK_BGC_V2/FeatureServer/0/query?outFields=*&where=1%3D1&f=geojson"
 GEOJSON_PATH = MAPPING_DIR / "local_authority.geojson"
+
+# Postcode centroids
+GEOJSON_PC_API_URL = "https://services1.arcgis.com/ESMARspQHYMw9BZ9/arcgis/rest/services/NSPL_Online_Latest_Centroids/FeatureServer/1/query?outFields=*&where=1&outFields=*&f=geojson"
+GEOJSON_PC_PATH = MAPPING_DIR / "post_codes.geojson"
+
 
 # Example output path for a specific file
 OUTPUT_PATH = RAW_DIR / "pp_complete.csv"

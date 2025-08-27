@@ -2,19 +2,10 @@ import requests
 from pathlib import Path
 
 def fetch_ons_geojson(query_url: str, output_path: Path, timeout: int):
-    """Fetch GeoJSON from ArcGIS API and save to a local file."""
-    
-    # Define parameters for the get request
-    params = {
-        "where": "1=1",          # get all features (no filtering)
-        "outFields": "*",        # include all attributes
-        "outSR": "4326",         # WGS84 lat/lon
-        "f": "geojson",          # required for GeoJSON format
-        "returnGeometry": "true"
-    }
+    """Fetch local authority GeoJSON from ArcGIS API and save to a local file."""
 
     # Run the get request
-    r = requests.get(query_url, params=params, timeout=timeout)
+    r = requests.get(query_url, timeout=timeout)
     
     # Check HTTP response code (SUCCESS does nothing)
     r.raise_for_status()

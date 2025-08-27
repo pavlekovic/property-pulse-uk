@@ -6,7 +6,7 @@ from src.utils.date_utils import last_month_ym
 from src.utils.path_resolve_utils import resolve_url_and_out_path
 from src.utils.logging_utils import setup_logger
 from config.extract_config import (FULL_URL, MONTHLY_URL, RAW_DIR,CHUNK_SIZE, TIMEOUT, 
-    STATE_FILE, FULL_FILENAME, MONTHLY_FILENAME, MAPPING_DIR, GEOJSON_PATH, GEOJSON_API_URL)
+    STATE_FILE, FULL_FILENAME, MONTHLY_FILENAME, MAPPING_DIR, GEOJSON_PATH, GEOJSON_API_URL, GEOJSON_PC_PATH, GEOJSON_PC_API_URL)
 
 # Initialize logger
 logger = setup_logger(name="extract", log_file="extract.log")
@@ -29,8 +29,9 @@ def extract() -> int:
         # GEOJSON DATA
         # --------------------------------------
         
+        # Local authority
         if GEOJSON_PATH.exists():
-            logger.info(f"GeoJSON already exists, skipping API request: {GEOJSON_PATH}")
+            logger.info(f"GeoJSON (local authority) already exists, skipping API request: {GEOJSON_PATH}")
         else:
             saved_geojson = ensure_geojson_once(
                     state=state,
@@ -44,9 +45,29 @@ def extract() -> int:
             write_state(STATE_FILE, saved_geojson)
             
             if state.get("geojson_fetched"):
-                logger.info(f"GeoJSON ready at: {GEOJSON_PATH}")
+                logger.info(f"GeoJSON (local authority) ready at: {GEOJSON_PATH}")
             else:
-                logger.warning("GeoJSON not marked as fetched; continuing.")
+                logger.warning("GeoJSON (local authority) not marked as fetched; continuing.")
+                
+        # Post codes
+        if GEOJSON_PC_PATH.exists():
+            logger.info(f"GeoJSON (post_codes) already exists, skipping API request: {GEOJSON_PC_PATH}")
+        else:
+            saved_geojson = ensure_geojson_once(
+                    state=state,
+                    mapping_dir=MAPPING_DIR,
+                    geojson_path=GEOJSON_PC_PATH,
+                    geojson_url=GEOJSON_PC_API_URL,
+                    timeout=TIMEOUT,
+                )
+            
+            # Write state for geojson
+            write_state(STATE_FILE, saved_geojson)
+            
+            if state.get("geojson_fetched"):
+                logger.info(f"GeoJSON (post_codes) ready at: {GEOJSON_PC_PATH}")
+            else:
+                logger.warning("GeoJSON (post_codes) not marked as fetched; continuing.")
         
         # --------------------------------------
         # PROPERTY PRICE DATA
