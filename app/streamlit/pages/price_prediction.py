@@ -45,6 +45,7 @@ def anchor_to_asking(pred_df: pd.DataFrame, mu_last: float, asking_price: float)
     return out[["year", "pred_price", "lower_95", "upper_95"]]
 
 art = load_artifact()
+print(art)
 params = art["params"]
 cats   = art["cat_categories"]
 year_max = int(art["year_max"])
@@ -97,7 +98,7 @@ with c6:
     tenure_label = st.radio("Tenure", list(ten_labels.values()), horizontal=False)
     tenure = [k for k, v in ten_labels.items() if v == tenure_label][0]
 
-if district is None or asking_price is None or postcode_zone is None:
+if district is None or asking_price is None:
     st.info("Select a district and postcode and enter an asking price.")
     st.stop()
 
@@ -108,10 +109,11 @@ if key not in params:
     st.stop()
 
 p = params[key]
+print(p)
 pred_abs = forecast_from_params(a=p["a"], b=p["b"], s_log=p["rmse_log"], last_year=p["last_year"], years_ahead=5)
 results = anchor_to_asking(pred_abs, mu_last=p["mu_last"], asking_price=asking_price)
 
-if district is not None and postcode_zone is not None and asking_price is not None:
+if district is not None and asking_price is not None:
     
     # ---------- Plot ----------
     st.subheader("Forecast (next 5 years)")
