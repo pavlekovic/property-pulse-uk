@@ -45,7 +45,7 @@ def anchor_to_asking(pred_df: pd.DataFrame, mu_last: float, asking_price: float)
     return out[["year", "pred_price", "lower_95", "upper_95"]]
 
 art = load_artifact()
-print(art)
+#print(art)
 params = art["params"]
 cats   = art["cat_categories"]
 year_max = int(art["year_max"])

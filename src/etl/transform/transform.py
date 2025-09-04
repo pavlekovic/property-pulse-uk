@@ -92,7 +92,7 @@ def transform() -> int:
         write_partitioned(fact_by_type, MART_FACT_BY_TYPE)
         logger.info(f"[marts] Wrote: {MART_FACT_BY_TYPE}")
 
-        # FACT: single file from 2010 for XGBoost
+        # FACT: single file from 2010 for XGBoost and linear regression
         print("[marts] Building fact_prediction …")
         fact_pred = fact_prediction(df)
         write_single(fact_pred, MART_PREDICTION)
