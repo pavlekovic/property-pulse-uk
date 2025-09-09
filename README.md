@@ -258,6 +258,7 @@ kanban
         Task 3.9: Unit test: state_utils.py
         Task 3.10: Unit test: geojson_utils.py
         Task 3.11: Unit test: path_resolve_utils.py
+        
      
 ```
 
@@ -324,7 +325,7 @@ kanban
         Task 2.1: Read TARGET_DB_* pieces from .env and compose URL with util function
         Task 2.2: Provide get_target to read TARGET_DB_SCHEMA and TARGET_DB_TABLE
         Task 2.3: Ensure .env is git-ignored
-        
+
         
 ```
 
