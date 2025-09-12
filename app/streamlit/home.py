@@ -50,7 +50,7 @@ st.markdown("")  # spacer
 
  
 # Deployment bug - have to use path
-HERO_PATH   = Path("app/streamlit/assets/front_shadow0001.png")
+HERO_PATH   = Path("app/streamlit/assets/logo.png")
 
 with c1:
     if HERO_PATH.exists():
