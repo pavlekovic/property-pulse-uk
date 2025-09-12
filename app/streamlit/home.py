@@ -48,14 +48,15 @@ c1, c2 = st.columns([6, 6], gap="large")
 
 st.markdown("")  # spacer
 
+ 
 # Deployment bug - have to use path
-GIF_PATH   = Path("app/streamlit/assets/map.gif")
+HERO_PATH   = Path("app/streamlit/assets/front_shadow0001.png")
 
 with c1:
-    if GIF_PATH.exists():
-        st.image(str(GIF_PATH), width=700)
+    if HERO_PATH.exists():
+        st.image(str(HERO_PATH), width=600)
     else:
-        st.info(f"No GIF at: {GIF_PATH}")
+        st.info(f"No logo at: {HERO_PATH}")
 
 with c2:
     st.markdown(
